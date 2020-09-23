@@ -63,6 +63,7 @@ const products = []
 const seed = async () => {
   try {
     await db.sync({force: true})
+    await db.sync({force: true})
     const userList = await Promise.all(users.map(user => User.create(user)))
     const addressList = await Promise.all(
       addresses.map(address => Address.create(address))
