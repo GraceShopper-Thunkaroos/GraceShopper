@@ -34,12 +34,37 @@ form div {
   height: 25%;
 }
 
+#All-Products {
+  display: flex;
+  border: 1px solid black;
+  flex-direction: column;
+}
+
+.product-card {
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 2px solid black;
+}
+
+.product-card > a > img {
+  width: 150px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.All-Products-Container {
+  display: flex;
+  border: 1px solid black;
+  flex-wrap: wrap;
+}
+
 .LandingAuthContainer {
   margin: auto;
   display: flex;
   flex-flow: column;
   width: 20%;
-  
+}
+
 .singleProduct {
   display: flex;
   flex-wrap: wrap;
