@@ -9,7 +9,7 @@ const App = props => {
     <div>
       {isLoggedIn && <Navbar />}
       <Routes />
-      <ProductCard />
+      {/* <ProductCard /> */}
     </div>
   )
 }
