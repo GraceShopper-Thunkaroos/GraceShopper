@@ -19,3 +19,24 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* Landing Page */
+#LandingPage {
+  display: flex;
+}
+
+#LandingPage #productFeed {
+  width: 80%;
+}
+
+#LandingPage img {
+  width: 25%;
+  height: 25%;
+}
+
+.LandingAuthContainer {
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+  width: 20%;
+}

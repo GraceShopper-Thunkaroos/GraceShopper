@@ -6,6 +6,14 @@ import {auth} from '../store'
 /**
  * COMPONENT
  */
+const FormStyling = {
+  // width: '80%',
+  margin: 'auto',
+  focus: {
+    backgroundColor: 'lightblue'
+  }
+}
+
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
