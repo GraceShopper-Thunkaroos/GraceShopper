@@ -39,4 +39,115 @@ form div {
   display: flex;
   flex-flow: column;
   width: 20%;
+  
+.singleProduct {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.singleProduct hr {
+  margin-top: 20px;
+  color: black;
+  background-color: black;
+}
+
+.singleProduct__container {
+  padding: 20px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.singleProduct__container__left {
+  flex: 0.3;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  transition: transform 100ms;
+}
+
+.singleProduct__container__left > img {
+  object-fit: contain;
+  height: 90%;
+}
+
+.singleProduct__container__left:hover > img {
+  transform: scale(1.05);
+}
+
+.singleProduct__container__right {
+  flex: 0.7;
+  padding: 20px;
+}
+
+.singleProduct__container__right > button {
+  margin-top: 25px;
+  padding: 10px;
+  background-color: #2e5eaa;
+  border-radius: 10px;
+  color: white;
+  border: 1px solid gray;
+}
+
+.singleProduct__container__right > h1 {
+  font-size: 75px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.singleProduct__price {
+  display: flex;
+}
+
+.singleProduct__price > h4 {
+  font-size: 20px;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 2%;
+}
+
+.singleProduct__price > h4:nth-child(2) {
+  font-size: 20px;
+  padding: 0px;
+  margin: 0px;
+  color: #e3170a;
+  text-decoration: line-through;
+}
+
+.singleProduct__container__right > h3 {
+  height: auto;
+  max-height: 10px;
+}
+
+.singleProduct__quantity__input {
+  margin-top: 20px;
+  display: flex;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.singleProduct__quantity__input > label {
+  margin-right: 10%;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.singleProduct__quantity__input > input {
+  text-align: center;
+  width: 25%;
+  max-width: 75px;
+  height: 35px;
+}
+
+.singleProduct__quantity__input:hover > input {
+  cursor: pointer;
+  outline-width: 0;
 }

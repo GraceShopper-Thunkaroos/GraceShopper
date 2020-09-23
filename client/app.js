@@ -1,6 +1,5 @@
 import React from 'react'
-
-import {Navbar} from './components'
+import {Navbar, ProductCard} from './components'
 import Routes from './routes'
 import {connect} from 'react-redux'
 
@@ -10,6 +9,7 @@ const App = props => {
     <div>
       {isLoggedIn && <Navbar />}
       <Routes />
+      <ProductCard />
     </div>
   )
 }
