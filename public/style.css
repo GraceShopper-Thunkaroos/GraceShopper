@@ -136,6 +136,87 @@ form div {
   }
 }
 
+
+.singleProduct__parent {
+  margin: 0px;
+  display: flex;
+}
+
+.singleProduct__left {
+  flex: 0.2;
+}
+
+.singleProduct__right {
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 900px;
+  object-fit: contain;
+  overflow: scroll;
+  border: 1px solid black;
+  align-content: center;
+  justify-items: center;
+}
+
+.singleProduct__right::-webkit-scrollbar {
+  display: none;
+}
+
+.singleProduct__right > h4 {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  margin-top: 10px;
+}
+
+.singleProduct__right:hover > h4 {
+  transform: scale(1.08);
+}
+
+.singleProduct__right > div {
+  margin: 10px;
+  display: flex;
+  height: auto;
+  justify-content: center;
+}
+
+.singleProduct__right:hover {
+  cursor: pointer;
+}
+
+.singleProduct__right > div > a {
+  text-decoration: none;
+}
+
+.singleProduct__right > div > a > img {
+  object-fit: contain;
+  margin-left: 10px;
+  height: auto;
+  padding: 0px;
+  padding-top: 10px;
+}
+
+.singleProduct__right > div > a > h3 {
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  color: black;
+}
+
+.singleProduct__right > div > a > h3:hover {
+  color: red;
+}
+
+.singleProduct__right > div > a > img:hover {
+  transform: scale(1.05);
+}
+
+.singleProduct__right > div > a > h4 {
+  text-align: center;
+  color: black;
+}
+
 .dividerOr {
   box-sizing: content-box;
   position: absolute;
@@ -190,12 +271,17 @@ form > * {
   width: 20%;
 } */
 
+
 .singleProduct {
+  flex: 0.8;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   border: 1px solid black;
+  height: 100vh;
+  border-radius: 2px;
   margin: 20px;
+  margin-top: 0px;
 }
 
 .singleProduct hr {
@@ -206,8 +292,8 @@ form > * {
 
 .singleProduct__container {
   padding: 20px;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -238,12 +324,19 @@ form > * {
 }
 
 .singleProduct__container__right > button {
+  display: flex;
+  align-items: center;
   margin-top: 25px;
   padding: 10px;
   background-color: #2e5eaa;
   border-radius: 10px;
   color: white;
   border: 1px solid gray;
+  letter-spacing: 1px;
+}
+
+.singleProduct__container__right > button > span {
+  margin-right: 10px;
 }
 
 .singleProduct__container__right > h1 {
@@ -300,4 +393,29 @@ form > * {
 .singleProduct__quantity__input:hover > input {
   cursor: pointer;
   outline-width: 0;
+}
+
+@media only screen and (max-width: 990px) {
+  .singleProduct__right {
+    display: none;
+  }
+
+  .singleProduct__container__right {
+    padding: 0px;
+  }
+
+  .singleProduct__container__left {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .singleProduct__container__right > h1 {
+    font-size: 35px;
+  }
+
+  .singleProduct__container__right > h3 {
+    font-size: 12px;
+    overflow-y: scroll;
+    height: 1000px;
+  }
 }
