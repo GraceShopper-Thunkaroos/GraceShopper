@@ -10,7 +10,7 @@ class Cart extends Component {
   }
 
   onSubmit() {
-    console.log("Purchase submitted");
+    console.log("Purchase submitted now");
   }
 
   render() {
