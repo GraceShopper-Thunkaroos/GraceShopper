@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCartItems } from "../store/cart";
 
-const userId = 1;
-
 class Cart extends Component {
-  componentDidMount() {
-    this.props.fetchCartItems(userId);
+  componentDidMount() {}
+
+  componentDidUpdate(oldProps) {
+    if (oldProps !== this.props) {
+      console.log(oldProps);
+      console.log(this.props);
+      console.log("ran");
+      this.props.fetchCartItems(this.props.user.id);
+    }
   }
 
   onSubmit() {
@@ -58,8 +63,10 @@ class Cart extends Component {
 }
 
 const mapState = state => {
+  console.log(state);
   return {
-    cartItems: state.cartItems
+    cartItems: state.cartItems,
+    user: state.user
   };
 };
 

@@ -30,7 +30,7 @@ class SingleProduct extends Component {
     const product = this.props.product;
     const upcharge = parseInt(product.price, 10) + product.price * 0.8;
     return (
-      <>
+      <React.Fragment>
         <div className="singleProduct__parent">
           {/* <div className="singleProduct__left"></div> */}
           <div className="singleProduct">
@@ -66,6 +66,12 @@ class SingleProduct extends Component {
                     <h3>{product.description}</h3>
                   </div>
                 </div>
+                <button type="button" onSubmit={this.onSubmit}>
+                  Add To Cart {"  "}
+                  <FaDog />
+                </button>
+                <hr />
+                <h3>{product.description}</h3>
               </div>
             ) : (
               <h4>Loading Product...</h4>
@@ -82,7 +88,7 @@ class SingleProduct extends Component {
             <ProductCard product={product} />
           </div>
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }
