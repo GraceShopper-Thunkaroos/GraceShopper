@@ -1,6 +1,9 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import GoogleButton from "react-google-button";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 /**
  * COMPONENT
  */
@@ -16,38 +19,71 @@ const FormStyling = {
 };
 
 const LandingAuthForm = props => {
+  console.log(props, "wow");
   return (
-    <Form onSubmit={props.handleSubmit} style={{ margin: "auto" }}>
+    <Form
+      onSubmit={props.onSubmit}
+      style={{
+        margin: "auto",
+        textAlign: "center",
+        width: "67%"
+      }}
+    >
       <Form.Row style={{ margin: 0 }}>
-        <Form.Group style={{ width: "60%", margin: 0 }}>
+        <Form.Group
+          style={{ width: "100%", margin: "auto", marginBottom: "1rem" }}
+        >
           <Form.Control
             required={true}
             name="email"
             placeholder="Email Address"
             size="lg"
+            value={props.email}
+            onChange={props.onChange}
           />
         </Form.Group>
       </Form.Row>
 
       <Form.Row style={{ margin: 0 }}>
-        <Form.Group style={{ width: "60%", margin: 0 }}>
+        <Form.Group style={{ width: "100%", margin: "auto" }}>
           <Form.Control
-            type="url"
+            type="password"
             name="password"
             placeholder="Password"
             size="lg"
+            value={props.password}
+            onChange={props.onChange}
           />
         </Form.Group>
       </Form.Row>
-
-      <Form.Row>
+      <br />
+      <Form.Row style={{ margin: 0 }}>
         <Button
           variant="primary"
           type="submit"
-          style={{ width: "100%", margin: "1rem" }}
+          style={{ width: "100%", margin: "auto", height: "3.3rem" }}
         >
           Log In
         </Button>
+      </Form.Row>
+      <div className="dividerWrapper" style={{ width: "100%", margin: "auto" }}>
+        <hr className="dividerLine" />
+        <div className="dividerOr">
+          <div className="dividerOrText">or</div>
+        </div>
+      </div>
+      <Form.Row style={{ margin: 0 }}>
+        <GoogleButton
+          style={{
+            width: "100%",
+            margin: "auto",
+            height: "3.3rem",
+            borderRadius: "4px",
+            paddingLeft: "2px",
+            paddingTop: "1px",
+            paddingBottom: "1px"
+          }}
+        />
       </Form.Row>
     </Form>
   );
