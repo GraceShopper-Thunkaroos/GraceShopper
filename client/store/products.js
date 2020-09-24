@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {GET_PRODUCTS, getProducts} from './productActions'
 
-//initial state
+// initial state
 const defaultProducts = []
 
 // thunk creators to get products
@@ -10,10 +10,11 @@ export const fetchProducts = () => async dispatch => {
     const {data} = await axios.get('/api/products')
     dispatch(getProducts(data))
   } catch (error) {
-    console.log('failed to get /api/projects')
+    console.log('Failed to get /api/products.')
   }
 }
-//products reducers
+
+// product reducers
 export default function(state = defaultProducts, action) {
   switch (action.type) {
     case GET_PRODUCTS:
