@@ -44,13 +44,11 @@ class Landing extends React.Component {
   }
 
   onChange(evt) {
-    console.log("ranodm");
     console.log(evt, evt.target.name, evt.target.value);
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
   render() {
-    console.log(this.state, "state");
     return (
       <div id="LandingPage">
         <div id="productImageFeed_Wrapper">

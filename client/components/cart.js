@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCartItems } from "../store/cart";
+import { me } from "../store/user";
 
 class Cart extends Component {
-  componentDidMount() {}
-
-  componentDidUpdate(oldProps) {
-    if (oldProps !== this.props) {
-      console.log(oldProps);
-      console.log(this.props);
-      console.log("ran");
-      this.props.fetchCartItems(this.props.user.id);
+  async componentDidMount() {
+    if (!this.props.user.id) {
+      await this.props.fetchMe();
     }
+
+    this.props.fetchCartItems(this.props.user.id);
   }
 
   onSubmit() {
@@ -63,7 +61,7 @@ class Cart extends Component {
 }
 
 const mapState = state => {
-  console.log(state);
+  console.log("THIS IS MAP STATE ----> , ", state);
   return {
     cartItems: state.cartItems,
     user: state.user
@@ -71,7 +69,8 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => ({
-  fetchCartItems: userId => dispatch(fetchCartItems(userId))
+  fetchCartItems: userId => dispatch(fetchCartItems(userId)),
+  fetchMe: () => dispatch(me())
 });
 
 export default connect(mapState, mapDispatch)(Cart);
