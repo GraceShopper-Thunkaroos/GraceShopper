@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
 a {
@@ -20,18 +21,51 @@ form div {
   display: inline-block;
 }
 
-/* Landing Page */
+/* Start of Landing Page */
 #LandingPage {
   display: flex;
+  flex-flow: row;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-#LandingPage #productFeed {
+#LandingPage #productImageFeed_Wrapper {
   width: 80%;
+  background-color: #e0eefd;
+  margin: 0;
+  padding-left: 21px;
+}
+
+.ProductImageFeed_ColumnWrapper {
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  width: 20%;
+  margin: 0;
+  display: table-row;
+}
+
+.pos1,
+.pos3 {
+  animation-name: productFeedColumnT;
+  display: table-cell;
+}
+
+.pos2,
+.pos4 {
+  animation-name: productFeedColumnD;
+  display: table-cell;
 }
 
 #LandingPage img {
-  width: 25%;
-  height: 25%;
+  width: 17vw;
+  height: 17vw;
+  margin-top: 1rem;
 }
 
 #All-Products {
@@ -59,6 +93,30 @@ form div {
 }
 
 .LandingAuthContainer {
+
+  width: 30%;
+}
+
+@keyframes productFeedColumnT {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes productFeedColumnD {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/* End of Landing Page */
+
+
   margin: auto;
   display: flex;
   flex-flow: column;

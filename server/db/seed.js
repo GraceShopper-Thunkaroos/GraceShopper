@@ -8,6 +8,7 @@ const {
   Order,
   OrderDetail
 } = require('./models')
+const randomName = require('./name')
 const axios = require('axios')
 
 const users = [
@@ -47,22 +48,9 @@ const billings = [
   }
 ]
 
-const names = [
-  'Fido',
-  'Brody',
-  'Deedee',
-  'Chipper',
-  'Buddy',
-  'Buck',
-  'Hank',
-  'Cody',
-  'Max',
-  'Frank'
-]
 const products = []
 const seed = async () => {
   try {
-    await db.sync({force: true})
     await db.sync({force: true})
     const userList = await Promise.all(users.map(user => User.create(user)))
     const addressList = await Promise.all(
@@ -75,9 +63,9 @@ const seed = async () => {
       'https://dog.ceo/api/breed/eskimo/images'
     )
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 100; i++) {
       products.push({
-        name: names[i],
+        name: randomName(),
         breed: 'Eskimo',
         description: 'A fiercely loyal companion.',
         quantity: 1,
@@ -123,9 +111,6 @@ const seed = async () => {
         })
       )
     )
-    // console.log(await order.getProducts())
-    // await order.addProduct([productList[0]])
-
     // Associating users with address and billing
     await userList[0].addAddress(addressList[0])
     await userList[1].addAddress(addressList[0])
