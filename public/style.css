@@ -96,6 +96,28 @@ form div {
   width: 30%;
 }
 
+.LandingAuthWrapper {
+  margin-top: 25vh;
+}
+
+.AuthFormHeader {
+  margin: 0 auto;
+  width: 67%;
+  display: flex;
+}
+.AuthFormHeader img {
+  flex: 1 1 0px !important;
+  width: 0 !important;
+  height: 8rem !important;
+  margin: 0 !important;
+}
+
+.AuthFormHeader span {
+  flex: 1.4 1 0px;
+  font-size: 2.3rem;
+  margin-top: 1.9rem;
+}
+
 @keyframes productFeedColumnT {
   0% {
     transform: translateY(0px);
@@ -113,7 +135,7 @@ form div {
     transform: translateY(0px);
   }
 }
-/* End of Landing Page */
+
 
 .singleProduct__parent {
   margin: 0px;
@@ -194,6 +216,61 @@ form div {
   text-align: center;
   color: black;
 }
+
+.dividerOr {
+  box-sizing: content-box;
+  position: absolute;
+  margin: 0;
+  top: 10px;
+  left: 50%;
+  height: 1em;
+  padding: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: white;
+  color: gray;
+  transform: translate(-50%, -50%);
+}
+
+.dividerOrText {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/*
+.dividerLine {
+  position: absolute;
+  top: 2px;
+  margin: 2px !important;
+  margin-top: 2px !important;
+  padding: 2px;
+} */
+
+ul.nav.nav-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.dividerWrapper {
+  position: relative;
+  height: 2rem;
+}
+
+form > * {
+  border-radius: 4px;
+}
+
+/* End of Landing Page */
+
+/* margin: auto;
+  display: flex;
+  flex-flow: column;
+  width: 20%;
+} */
+
 
 .singleProduct {
   flex: 0.8;
