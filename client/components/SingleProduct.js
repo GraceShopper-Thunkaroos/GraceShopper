@@ -23,6 +23,8 @@ class SingleProduct extends Component {
     });
   };
 
+  onSubmit = e => {};
+
   render() {
     const product = this.props.product;
     console.log(this.props);
@@ -48,7 +50,7 @@ class SingleProduct extends Component {
                   onChange={this.onChange}
                 />
               </div>
-              <button type="button">
+              <button type="button" onSubmit={this.onSubmit}>
                 Add To Cart {"  "}
                 <FaDog />
               </button>

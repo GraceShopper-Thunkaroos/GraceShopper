@@ -68,6 +68,31 @@ form div {
   margin-top: 1rem;
 }
 
+.LandingAuthContainer {
+  width: 30%;
+}
+
+@keyframes productFeedColumnT {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes productFeedColumnD {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/* End of Landing Page */
+
+/* Product Pages */
+
 #All-Products {
   display: flex;
   border: 1px solid black;
@@ -92,36 +117,24 @@ form div {
   flex-wrap: wrap;
 }
 
-.LandingAuthContainer {
+/* Cart Page */
 
-  width: 30%;
+.user-cart {
+  display: flex;
+  border: 1px solid black;
+  flex-direction: column;
 }
 
-@keyframes productFeedColumnT {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
+.cart-items {
+  border: 1px solid black;
+  flex-direction: row;
 }
 
-@keyframes productFeedColumnD {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-/* End of Landing Page */
-
-
-  margin: auto;
+/* margin: auto;
   display: flex;
   flex-flow: column;
   width: 20%;
-}
+} */
 
 .singleProduct {
   display: flex;
