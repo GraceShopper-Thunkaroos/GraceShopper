@@ -13,7 +13,7 @@ export const ProductCard = props => {
         <img src={product.picture} />
         <h3> {product.name} </h3>
         <h4>
-          {product.breed} | {product.price}
+          {product.breed} | ${product.price}
         </h4>
       </Link>
     </div>

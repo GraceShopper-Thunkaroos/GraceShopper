@@ -8,6 +8,7 @@ const App = props => {
   return (
     <div>
       {isLoggedIn && <Navbar />}
+      <Navbar />
       <Routes />
     </div>
   )
