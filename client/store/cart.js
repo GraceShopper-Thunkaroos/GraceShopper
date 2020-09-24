@@ -13,10 +13,10 @@ const getCartItems = cartItems => {
 
 export const fetchCartItems = userId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/orders/user/${userId}`)
+    const {data} = await axios.get(`/api/orders/${userId}`)
     dispatch(getCartItems(data))
   } catch (error) {
-    console.log('Failed to get /api/orders/user/userId.')
+    console.log('Failed to get /api/orders/userId.')
   }
 }
 

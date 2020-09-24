@@ -4,6 +4,10 @@ import { fetchCartItems } from "../store/cart";
 import { me } from "../store/user";
 
 class Cart extends Component {
+  constructor() {
+    super();
+    this.onSubmit = this.onSubmit.bind(this);
+  }
   async componentDidMount() {
     if (!this.props.user.id) {
       await this.props.fetchMe();
@@ -14,6 +18,7 @@ class Cart extends Component {
 
   onSubmit() {
     console.log("Purchase submitted now");
+    this.props.history.push("/checkout");
   }
 
   render() {
@@ -51,7 +56,7 @@ class Cart extends Component {
           <h2>Currently, there are no items in your cart.</h2>
         )}
         <h4> Total Order Cost: </h4> <h5> ${totalOrderCost} </h5>
-        <button type="submit" onSubmit={this.onSubmit}>
+        <button type="button" onClick={this.onSubmit}>
           {" "}
           Submit Purchase{" "}
         </button>
