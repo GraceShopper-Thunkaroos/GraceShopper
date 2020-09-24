@@ -56,7 +56,7 @@ class SingleProduct extends Component {
                       min="0"
                     />
                   </div>
-                  <button type="button">
+                  <button type="button" onSubmit={this.onSubmit}>
                     Add To Cart {"  "}
                     <span />
                     <FaDog />
@@ -67,13 +67,6 @@ class SingleProduct extends Component {
                   </div>
                 </div>
               </div>
-              <button type="button" onSubmit={this.onSubmit}>
-                Add To Cart {"  "}
-                <FaDog />
-              </button>
-              <hr />
-              <h3>{product.description}</h3>
-            </div>
             ) : (
               <h4>Loading Product...</h4>
             )}

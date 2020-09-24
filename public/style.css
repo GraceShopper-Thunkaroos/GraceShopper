@@ -117,14 +117,13 @@ form div {
   flex-wrap: wrap;
 }
 
-
 /* Cart Page */
 
 .user-cart {
   display: flex;
   border: 1px solid black;
   flex-direction: column;
-
+}
 .LandingAuthContainer {
   width: 30%;
 }
@@ -158,15 +157,12 @@ form div {
   100% {
     transform: translateY(-50%);
   }
-
 }
 
 .cart-items {
   border: 1px solid black;
   flex-direction: row;
 }
-
-
 
 .singleProduct__parent {
   margin: 0px;
@@ -293,14 +289,6 @@ ul.nav.nav-tabs {
 form > * {
   border-radius: 4px;
 }
-
-/* End of Landing Page */
-
-/* margin: auto;
-  display: flex;
-  flex-flow: column;
-  width: 20%;
-} */
 
 .singleProduct {
   flex: 0.8;
