@@ -68,6 +68,31 @@ form div {
   margin-top: 1rem;
 }
 
+.LandingAuthContainer {
+  width: 30%;
+}
+
+@keyframes productFeedColumnT {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes productFeedColumnD {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/* End of Landing Page */
+
+/* Product Pages */
+
 #All-Products {
   display: flex;
   border: 1px solid black;
@@ -91,6 +116,14 @@ form div {
   border: 1px solid black;
   flex-wrap: wrap;
 }
+
+
+/* Cart Page */
+
+.user-cart {
+  display: flex;
+  border: 1px solid black;
+  flex-direction: column;
 
 .LandingAuthContainer {
   width: 30%;
@@ -125,16 +158,14 @@ form div {
   100% {
     transform: translateY(-50%);
   }
+
 }
 
-@keyframes productFeedColumnD {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.cart-items {
+  border: 1px solid black;
+  flex-direction: row;
 }
+
 
 
 .singleProduct__parent {
@@ -270,7 +301,6 @@ form > * {
   flex-flow: column;
   width: 20%;
 } */
-
 
 .singleProduct {
   flex: 0.8;

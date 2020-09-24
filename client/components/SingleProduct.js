@@ -24,6 +24,8 @@ class SingleProduct extends Component {
     });
   };
 
+  onSubmit = e => {};
+
   render() {
     const product = this.props.product;
     const upcharge = parseInt(product.price, 10) + product.price * 0.8;
@@ -65,6 +67,13 @@ class SingleProduct extends Component {
                   </div>
                 </div>
               </div>
+              <button type="button" onSubmit={this.onSubmit}>
+                Add To Cart {"  "}
+                <FaDog />
+              </button>
+              <hr />
+              <h3>{product.description}</h3>
+            </div>
             ) : (
               <h4>Loading Product...</h4>
             )}
