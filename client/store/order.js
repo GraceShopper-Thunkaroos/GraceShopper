@@ -18,6 +18,7 @@ export const fetchOrder = userId => dispatch => {
     console.log('failed to get api/orders/:id')
   }
 }
+
 // store, added it to index as well
 export default function(state = initialState, action) {
   switch (action.type) {

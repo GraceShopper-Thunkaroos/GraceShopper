@@ -10,7 +10,8 @@ import {
   SingleProduct,
   Landing,
   Cart,
-  Checkout
+  Checkout,
+  ThankYou
 } from './components'
 
 import {me} from './store'
@@ -39,6 +40,7 @@ class Routes extends Component {
         <Route path="/products" component={AllProducts} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/thankyou" component={ThankYou} />
 
         {isLoggedIn && (
           <Switch>
