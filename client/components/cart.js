@@ -8,12 +8,11 @@ class Cart extends Component {
     super();
     this.onSubmit = this.onSubmit.bind(this);
   }
-  async componentDidMount() {
-    if (!this.props.user.id) {
-      await this.props.fetchMe();
+  componentDidMount() {
+    if (this.props.user.id) {
+      console.log(this.props.user.id);
+      this.props.fetchCartItems(this.props.user.id);
     }
-
-    this.props.fetchCartItems(this.props.user.id);
   }
 
   onSubmit() {
@@ -23,32 +22,27 @@ class Cart extends Component {
 
   render() {
     const cartItems = this.props.cartItems;
-    let cartIndicator = false;
-    let orderName = "";
-    if (cartItems[0] !== undefined) {
-      cartIndicator = true;
-      orderName = cartItems[0].user.name;
-    }
+    const user = this.props.user;
     let totalOrderCost = 0;
     return (
       <div className="user-cart">
-        <h3> {orderName}'s Cart:</h3>
-        {cartIndicator ? (
+        <h3> {user.firstName}'s Cart:</h3>
+        {cartItems.length ? (
           cartItems.map(item => {
-            totalOrderCost += parseInt(item.totalPrice, 10);
+            const { product, quantity } = item;
+            totalOrderCost += parseInt(product.price, 10);
             return (
-              <div key={item.id} className="cart-items">
-                <h4>Product ID:</h4>
-                <h5>{}</h5>
+              <div key={product.id} className="cart-items">
+                <h4>Product Name: {product.name}</h4>
+                {/* <h4>Product ID:</h4>
+                 <h5>{}</h5>
                 <h4>Phone Number:</h4>
                 <h5>{item.user.phoneNumber}</h5>
                 <h4>Expected Delivery Date:</h4>{" "}
                 <h5>{item.expectedDeliveryDate}</h5>
-                <h4>Additional Instructions:</h4> <h5>{item.instruction}</h5>
-                <h4>Item Quantity:</h4>
-                <h5>{}</h5>
-                <h4>Item Price:</h4>
-                <h5>${item.totalPrice}</h5>
+                <h4>Additional Instructions:</h4> <h5>{item.instruction}</h5> */}
+                <h4>Item Quantity: {quantity}</h4>
+                <h4>Item Price: {`$ ${product.price}`}</h4>
               </div>
             );
           })
@@ -57,8 +51,7 @@ class Cart extends Component {
         )}
         <h4> Total Order Cost: </h4> <h5> ${totalOrderCost} </h5>
         <button type="button" onClick={this.onSubmit}>
-          {" "}
-          Submit Purchase{" "}
+          Submit Purchase
         </button>
       </div>
     );

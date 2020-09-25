@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
@@ -24,30 +24,35 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isGuest} = this.props
+    console.log('routes rendered', isLoggedIn, isGuest)
+    const accessGranted = isGuest || isLoggedIn
 
+    console.log('history', this.props.history)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={Landing} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-
-        {/* <Route path="/single" component={SingleProduct} /> */}
-        <Route path="/products/:id" component={SingleProduct} />
-
-        <Route path="/products" component={AllProducts} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={Checkout} />
-
-        {isLoggedIn && (
+        {accessGranted && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+
+            {/* <Route path="/single" component={SingleProduct} /> */}
+            <Route path="/products/:id" component={SingleProduct} />
+
+            <Route path="/products" component={AllProducts} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/checkout" component={Checkout} />
             <Route path="/home" component={UserHome} />
+            {/* Displays Landing page as a fallback */}
+            {/* <Route component={Landing} /> */}
           </Switch>
         )}
+
+        {/* {!accessGranted && <Route component={Landing} />} */}
+
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
       </Switch>
     )
   }
@@ -60,7 +65,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isGuest: !!state.user.guest
   }
 }
 
