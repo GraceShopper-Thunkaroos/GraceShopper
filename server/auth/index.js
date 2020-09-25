@@ -2,7 +2,9 @@ const router = require('express').Router()
 const User = require('../db/models/user')
 module.exports = router
 
+console.log('auth first line')
 router.post('/login', async (req, res, next) => {
+  console.log('auth login')
   try {
     const user = await User.findOne({where: {email: req.body.email}})
     if (!user) {
@@ -39,6 +41,7 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
+  console.log('inside auth me')
   res.json(req.user)
 })
 

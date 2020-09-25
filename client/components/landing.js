@@ -3,8 +3,9 @@ import axios from "axios";
 import LandingAuthForm from "./landing-auth-form.js";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import { auth } from "../store/user";
+import { auth, setGuest } from "../store/user";
 import { connect } from "react-redux";
+import Button from "react-bootstrap/Button";
 
 const style1 = {
   display: "flex",
@@ -13,7 +14,8 @@ const style1 = {
   margin: "0 auto",
   marginBottom: "2.5rem",
   padding: 0,
-  width: "67%"
+  width: "67%",
+  justifyContent: "center"
 };
 
 const style2 = {
@@ -49,6 +51,7 @@ class Landing extends React.Component {
   }
 
   render() {
+    console.log("landing rendered?!?!");
     return (
       <div id="LandingPage">
         <div id="productImageFeed_Wrapper">
@@ -127,6 +130,18 @@ class Landing extends React.Component {
                   onSubmit={this.onSubmit}
                 />
               </Tab>
+              <Tab eventKey="guest" title="Guest" style={style2}>
+                <Button
+                  variant="primary"
+                  style={{ width: "67%", margin: "auto", height: "3.3rem" }}
+                  onClick={() => {
+                    this.props.setGuest();
+                    this.props.history.push("/home");
+                  }}
+                >
+                  Browse dogs as a guest!
+                </Button>
+              </Tab>
             </Tabs>
             {/* <LandingAuthForm /> */}
           </div>
@@ -137,7 +152,8 @@ class Landing extends React.Component {
 }
 
 const mapDispatch = dispatch => ({
-  auth: (email, password) => dispatch(auth(email, password, "login"))
+  auth: (email, password) => dispatch(auth(email, password, "login")),
+  setGuest: () => dispatch(setGuest())
 });
 
 const mapProps = state => ({
