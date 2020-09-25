@@ -2,8 +2,8 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import GoogleButton from "react-google-button";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
+import history from "../history";
+import axios from "axios";
 /**
  * COMPONENT
  */
@@ -83,7 +83,11 @@ const LandingAuthForm = props => {
             paddingTop: "1px",
             paddingBottom: "1px"
           }}
+          onClick={() => {
+            history.push("/auth/google");
+          }}
         />
+        <a href="/auth/google">COME ON with Google</a>
       </Form.Row>
     </Form>
   );

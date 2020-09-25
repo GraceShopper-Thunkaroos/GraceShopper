@@ -54,18 +54,27 @@ const createApp = () => {
   // session middleware with passport
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      secret: process.env.SESSION_SECRET || 'AKGxeiFZPZFF88KEAAAB',
       store: sessionStore,
       resave: false,
       saveUninitialized: false
     })
   )
+
   app.use(passport.initialize())
   app.use(passport.session())
+  app.get('/test2', (req, res) => {
+    res.json([req.user, req.session])
+  })
 
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+
+  // test
+  app.get('/test', (req, res) => {
+    res.json(req.session)
+  })
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
