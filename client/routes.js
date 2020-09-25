@@ -10,7 +10,8 @@ import {
   SingleProduct,
   Landing,
   Cart,
-  Checkout
+  Checkout,
+  ThankYou
 } from './components'
 
 import {me} from './store'
@@ -37,7 +38,10 @@ class Routes extends Component {
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-
+            <Route path="/products" component={AllProducts} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/thankyou" component={ThankYou} />
             {/* <Route path="/single" component={SingleProduct} /> */}
             <Route path="/products/:id" component={SingleProduct} />
 

@@ -1,42 +1,64 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { fetchOrder } from "../store/order";
 import { connect } from "react-redux";
+// import { Cart } from "./cart";
+// import { fetchCartItems } from "../store/cart";
+import { fetchOrder } from "../store/order";
 
 class Checkout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      orderComplete: false
-    };
-    this.successPayment = this.successPayment.bind(this);
+  componentDidMount() {
+    this.props.fetchOrder(this.props.order.id);
   }
-  // componentDidMount() {
-  //     this.props.fetchOrder(this.props.match.params.id)
-  // }
-  successPayment() {
-    this.setState({
-      orderComplete: true
-    });
 
-    // errorPayment(data) {
-    //     alert('Payment error')
-    // }
+  onSubmit() {
+    this.props.history.push("/thankyou");
   }
 
   render() {
-    console.log(this);
+    const order = this.props.order;
+    console.log("this is the order", order);
+    // const order = this.props.order;
     return (
       <div id="checkout-page">
-        <h1> checkout out page </h1>
-        <div className="Checkout-page">
-          {/* {cartItem.map(item => {
-                return <Cart key={cartItem.id} cartItem={cartItem} />
-            })} */}
+        <h1> Checkout page</h1>
+        <div className="All-Products-Container">
+          {/* {cartItems.map((item) => {
+            return <Cart key={item.id} item={item} />;
+          })} */}
+        </div>
+        <div id="order-details">
+          <h2>order details</h2>
+          {/* {orders.map((order) => {
+            <div key={order.id}>
+              <h3>{order.status}</h3>
+              <ul>
+                <li>totalPrice: {order.totalPrice}</li>
+                <li>instruction: {order.intruction}</li>
+                <li>purchase date: {order.purchaseDate}</li>
+                <li>expected delivery date {order.expectedDeliveryDate}</li>
+              </ul>
+            </div>;
+          })} */}
+          <button type="button" onClick={this.onSubmit}>
+            {" "}
+            confirm order
+          </button>
         </div>
       </div>
     );
   }
 }
 
-export default connect(null, null)(Checkout);
+const mapState = state => {
+  return {
+    // cartItems: state.cartItems,
+    order: state.order
+  };
+};
+
+const mapDispatch = dispatch => ({
+  // fetchCartItems: (userId) => dispatch(fetchCartItems(userId)),
+  fetchOrder: userId => dispatch(fetchOrder(userId))
+});
+
+export default connect(mapState, mapDispatch)(Checkout);
