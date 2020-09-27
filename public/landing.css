@@ -20,6 +20,12 @@
 .LandingAuthWrapper nav > a {
   font-size: 2vh;
   width: 100%;
+  text-align: center;
+  color: black;
+}
+
+.LandingAuthWrapper nav > a[aria-selected='true'] {
+  font-weight: bold;
 }
 
 .LandingAuthContainer {
@@ -127,3 +133,24 @@
   transform: translate(-50%, -50%);
 }
 /* End of Divider */
+
+/* Start of Tab Container */
+
+.tabContainer {
+  width: 67%;
+  margin: auto;
+  display: flex;
+}
+
+.tabContainer > * {
+  flex-grow: 1;
+  text-align: center;
+  border-bottom: solid 2px #f0f5f7;
+}
+
+.tabContainer > [aria-selected='true'] {
+  border-bottom: solid 2px #30b7ec;
+  font-weight: bold;
+}
+
+/* End of Tab Container */

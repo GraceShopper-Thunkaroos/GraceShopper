@@ -38,11 +38,23 @@ class Landing extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.tabSelect = this.tabSelect.bind(this);
   }
 
   async componentDidMount() {
     const { data: products } = await axios.get("/api/products/");
     this.setState({ productPictures: products.map(elt => elt.picture) });
+  }
+
+  tabSelect(evt) {
+    console.log(
+      evt,
+      evt.target,
+      evt.target.name,
+      evt.target.dataset.name,
+      "tabSelect"
+    );
+    this.setState({ tab: evt.target.dataset.name });
   }
 
   async onSubmit(evt) {
@@ -53,15 +65,12 @@ class Landing extends React.Component {
   }
 
   onChange(evt) {
-    console.log(evt, evt.target.name, evt.target.value);
+    console.log(evt, typeof evt, Object.keys(evt.target));
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
   render() {
-    console.log("landing rendered?!?!");
-    if (this.props.user.error) {
-      console.log("submit error", this.props.user.error);
-    }
+    console.log("landing state", this.state);
     return (
       <div id="LandingPage">
         <div id="productImageFeed_Wrapper">
@@ -118,7 +127,32 @@ class Landing extends React.Component {
               <img src="https://images.creativemarket.com/0.1.0/ps/2067197/300/200/m2/fpnw/wm0/drd-.png?1482770793&s=64577ab8ec60ccd4280a6f7f0068689b" />
               <span>Doctor Pup</span>
             </div>
-            <Tabs
+            <div className="tabContainer">
+              <div
+                data-name="login"
+                aria-selected={this.state.tab === "login"}
+                onClick={this.tabSelect}
+              >
+                Log In
+              </div>
+              <div
+                data-name="signup"
+                aria-selected={this.state.tab === "signup"}
+                onClick={this.tabSelect}
+              >
+                Sign Up
+              </div>
+            </div>
+            <LandingAuthForm
+              email={this.state.email}
+              password={this.state.password}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              onChange={this.onChange}
+              onSubmit={this.onSubmit}
+              tab={this.state.tab}
+            />
+            {/* <Tabs
               defaultActiveKey="login"
               onSelect={evt => this.setState({ tab: evt })}
               style={tabContainerStyle}
@@ -156,7 +190,7 @@ class Landing extends React.Component {
                   Browse dogs as a guest!
                 </Button>
               </Tab>
-            </Tabs>
+            </Tabs> */}
           </div>
         </div>
       </div>
