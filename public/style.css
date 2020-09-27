@@ -41,7 +41,7 @@ form div {
 }
 
 .ProductImageFeed_ColumnWrapper {
-  animation-duration: 60s;
+  animation-duration: 150s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: normal;
@@ -62,14 +62,17 @@ form div {
   display: table-cell;
 }
 
-#LandingPage img {
+#productImageFeed_Wrapper img {
   width: 17vw;
   height: 17vw;
   margin-top: 1rem;
+  border-radius: 2px;
+  border: solid lightblue 0.2px;
 }
 
 .LandingAuthContainer {
   width: 30%;
+  border-left: solid lightblue 0.1px;
 }
 
 @keyframes productFeedColumnT {

@@ -7,8 +7,7 @@ const App = props => {
   const {isLoggedIn} = props
   return (
     <div>
-      {/* {isLoggedIn && <Navbar />} */}
-      <Navbar />
+      {isLoggedIn && <Navbar />}
       <Routes />
     </div>
   )

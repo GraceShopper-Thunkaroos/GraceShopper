@@ -33,17 +33,18 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={Landing} />
+        {!accessGranted && <Route exact path="/" component={Landing} />}
         {accessGranted && (
           <Switch>
+            <Route exact path="/" component={UserHome} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/products/:id" component={SingleProduct} />
             <Route path="/products" component={AllProducts} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/thankyou" component={ThankYou} />
             {/* <Route path="/single" component={SingleProduct} /> */}
-            <Route path="/products/:id" component={SingleProduct} />
 
             <Route path="/products" component={AllProducts} />
             <Route path="/cart" component={Cart} />
