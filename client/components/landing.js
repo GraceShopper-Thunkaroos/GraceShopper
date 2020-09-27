@@ -7,20 +7,22 @@ import { auth, postGuest } from "../store/user";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 
-const style1 = {
+const tabContainerStyle = {
   display: "flex",
   flexWrap: "nowrap",
   alignItems: "stretch",
   margin: "0 auto",
   marginBottom: "2.5rem",
   padding: 0,
-  width: "67%",
-  justifyContent: "center"
+  width: "90%",
+  justifyContent: "center",
+  height: "4vw"
 };
 
-const style2 = {
+const tabStyle = {
   flex: 1,
-  textAlign: "center"
+  textAlign: "center",
+  fontSize: "2vw"
 };
 
 class Landing extends React.Component {
@@ -45,13 +47,9 @@ class Landing extends React.Component {
 
   async onSubmit(evt) {
     evt.preventDefault();
-    console.log("IN SUBMIT");
     const { email, password, firstName, lastName } = this.state;
     this.props.auth({ email, password, firstName, lastName }, this.state.tab);
     this.setState({ email: "", password: "", firstName: "", lastName: "" });
-    if (this.props.user.error) {
-      console.log("submit error sadf", this.props.user.error);
-    }
   }
 
   onChange(evt) {
@@ -123,18 +121,19 @@ class Landing extends React.Component {
             <Tabs
               defaultActiveKey="login"
               onSelect={evt => this.setState({ tab: evt })}
-              style={style1}
+              style={tabContainerStyle}
             >
-              <Tab eventKey="login" title="Log In" style={style2}>
+              <Tab eventKey="login" title="Log In" style={tabStyle}>
                 <LandingAuthForm
                   email={this.state.email}
                   password={this.state.password}
                   onChange={this.onChange}
                   onSubmit={this.onSubmit}
+                  errorMessage={this.props.user.error}
                   tab={this.state.tab}
                 />
               </Tab>
-              <Tab eventKey="signup" title="Sign Up" style={style2}>
+              <Tab eventKey="signup" title="Sign Up" style={tabStyle}>
                 <LandingAuthForm
                   email={this.state.email}
                   password={this.state.password}
@@ -145,7 +144,7 @@ class Landing extends React.Component {
                   tab={this.state.tab}
                 />
               </Tab>
-              <Tab eventKey="guest" title="Guest" style={style2}>
+              <Tab eventKey="guest" title="Guest" style={tabStyle}>
                 <Button
                   variant="primary"
                   style={{ width: "67%", margin: "auto", height: "3.3rem" }}

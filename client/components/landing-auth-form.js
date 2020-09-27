@@ -70,6 +70,7 @@ const LandingAuthForm = props => {
         </Form.Group>
       </Form.Row>
       <br />
+      {props.errorMessage && <div>{props.errorMessage}</div>}
       <Form.Row style={{ margin: 0 }}>
         <Button
           variant="primary"

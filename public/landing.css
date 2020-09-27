@@ -1,0 +1,129 @@
+#LandingPage {
+  display: flex;
+  flex-flow: row;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#LandingPage #productImageFeed_Wrapper {
+  /* width: 80%; */
+  background-color: #e0eefd;
+  margin: 0;
+  padding-left: 21px;
+  flex: 1;
+}
+
+.LandingAuthWrapper nav > a {
+  font-size: 2vh;
+  width: 100%;
+}
+
+.LandingAuthContainer {
+  border-left: solid lightblue 0.1px;
+  flex: 0.52;
+}
+
+.ProductImageFeed_ColumnWrapper {
+  animation-duration: 150s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  width: 20%;
+  margin: 0;
+  display: table-row;
+}
+
+.pos1,
+.pos3 {
+  animation-name: productFeedColumnT;
+  display: table-cell;
+}
+
+.pos2,
+.pos4 {
+  animation-name: productFeedColumnD;
+  display: table-cell;
+}
+
+#productImageFeed_Wrapper img {
+  width: 100%;
+  height: 100%;
+  margin-top: 1rem;
+  border-radius: 2px;
+  border: solid lightblue 0.2px;
+}
+
+@keyframes productFeedColumnT {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes productFeedColumnD {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.LandingAuthWrapper {
+  margin-top: 10vh;
+  height: 50%;
+}
+
+/* Start of Header */
+.AuthFormHeader {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+}
+.AuthFormHeader img {
+  flex: 1 1 0px;
+  width: 4vw;
+  height: 7vw;
+  margin: 0rem;
+}
+
+.AuthFormHeader span {
+  flex: 1.4 1 0px;
+  font-size: 2vw;
+  margin-top: 2rem;
+}
+/* End of Header */
+
+/* Start of Divider */
+.dividerWrapper {
+  position: relative;
+  height: 2rem;
+}
+
+.dividerOrText {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.dividerOr {
+  box-sizing: content-box;
+  position: absolute;
+  margin: 0;
+  top: 10px;
+  left: 50%;
+  height: 1em;
+  padding: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: white;
+  color: gray;
+  transform: translate(-50%, -50%);
+}
+/* End of Divider */

@@ -46,37 +46,16 @@ export const me = () => async dispatch => {
 }
 console.log('IS THIS RUNNING')
 export const auth = (formData, method) => async dispatch => {
-  console.log('inside user store auth')
   try {
-    // var res = axios.post(`/auth/${method}`, formData)
-    // const res = await fetch('/auth/login/', {
-    //   method: 'post',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    // res.json().then((body) => console.log(body))
-
     var res = await axios.post(`/auth/${method}`, formData)
   } catch (authError) {
-    console.log(
-      'error in user store auth',
-      formData,
-      method,
-      authError,
-      authError.response
-    )
-    return dispatch(getUser({error: authError}))
+    return dispatch(getUser({error: authError.response.data}))
   }
 
   try {
-    console.log('about to push history in user stoer auth')
     dispatch(getUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
-    console.log('second block auth error')
     console.error(dispatchOrHistoryErr)
   }
 }
