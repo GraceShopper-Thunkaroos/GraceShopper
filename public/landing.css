@@ -140,11 +140,14 @@
   width: 67%;
   margin: auto;
   display: flex;
+  font-size: 18px;
+  margin-bottom: 4vh;
 }
 
 .tabContainer > * {
   flex-grow: 1;
   text-align: center;
+  padding-bottom: 1.9vh;
   border-bottom: solid 2px #f0f5f7;
 }
 
