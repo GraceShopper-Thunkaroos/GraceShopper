@@ -39,12 +39,16 @@ class Cart extends Component {
   render() {
     const cartItems = this.props.cartItems;
     const user = this.props.user;
-    // const numItems = cartItems.reduce((accum, currentItem) => {
-    //   accum += currentItem.quantity;
-    //   return accum;
-    // }, 0);
+    let numItems = 0;
+    if (cartItems) {
+      if (cartItems.length > 0) {
+        numItems = cartItems.reduce((accum, currentItem) => {
+          accum += currentItem.quantity;
+          return accum;
+        }, 0);
+      }
+    }
 
-    console.log("RENDERING, ", this);
     let totalOrderCost = 0;
     return (
       <div className="cart">
@@ -95,21 +99,31 @@ class Cart extends Component {
         <div className="cart__right">
           <div className="cart__right__container">
             <div className="cart__right__top">
-              <div className="cart__right__summary">
-                <h4>Order Summary</h4>
-                <div className="summary__line">
-                  <h6> Dogs</h6>
-                  <h6>${totalOrderCost}</h6>
+              {cartItems.length === 0 ? (
+                <h4>Go find your next bestfriend!</h4>
+              ) : (
+                <div className="cart__right__summary">
+                  <h4>Order Summary</h4>
+                  <div className="summary__line">
+                    {cartItems ? (
+                      <h6>
+                        {numItems} {numItems === 1 ? "Dog" : "Dogs"}
+                      </h6>
+                    ) : (
+                      <h4>loading</h4>
+                    )}
+                    <h6>${totalOrderCost}</h6>
+                  </div>
+                  <div className="summary__line">
+                    <h6>Shipping</h6>
+                    <h6>FREE</h6>
+                  </div>
+                  <div className="summary__line">
+                    <h5>Grand Total:</h5>
+                    <h5>${totalOrderCost}</h5>
+                  </div>
                 </div>
-                <div className="summary__line">
-                  <h6>Shipping</h6>
-                  <h6>FREE</h6>
-                </div>
-                <div className="summary__line">
-                  <h5>Grand Total:</h5>
-                  <h5>${totalOrderCost}</h5>
-                </div>
-              </div>
+              )}
             </div>
             <div className="cart__right__bottom">
               <button
