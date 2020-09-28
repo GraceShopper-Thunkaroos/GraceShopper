@@ -102,7 +102,6 @@ const seed = async () => {
       totalPrice: 1500
     })
     const closedOrder = await Order.create({
-      status: 'Delivered',
       instruction: 'Please ring the doorbell when you are in front.',
       purchaseDate: '09/20/2020',
       expectedDeliveryDate: '09/22/2020',

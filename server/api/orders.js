@@ -49,3 +49,32 @@ router.get('/user/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:userId/:lineId', async (req, res, next) => {
+  try {
+    const {userId, lineId} = req.params
+    console.log('userid, lineId, ', userId, lineId)
+    if (Number.isNaN(userId) || Number.isNaN(lineId)) return res.sendStatus(400)
+    const orderId = await Order.findAll({
+      where: {
+        [Op.and]: [{userId: req.params.userId}, {status: 'Open'}]
+      }
+    })
+    if (orderId.length !== 0) {
+      const orderLine = await OrderDetail.findOne({
+        where: {
+          orderId: orderId[0].dataValues.id,
+          productId: lineId
+        }
+      })
+      if (orderLine) {
+        await orderLine.destroy()
+        res.sendStatus(204)
+      }
+    } else {
+      res.sendStatus(404)
+    }
+  } catch (err) {
+    next(err)
+  }
+})

@@ -6,6 +6,7 @@ import Tab from "react-bootstrap/Tab";
 import { auth, setGuest } from "../store/user";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
+import { useHistory } from "react-router-dom";
 
 const style1 = {
   display: "flex",
@@ -36,6 +37,9 @@ class Landing extends React.Component {
   }
 
   async componentDidMount() {
+    // if (this.user.props) {
+    //   console.log("exist");
+    // }
     const { data: products } = await axios.get("/api/products/");
     this.setState({ productPictures: products.map(elt => elt.picture) });
   }
@@ -46,7 +50,7 @@ class Landing extends React.Component {
   }
 
   onChange(evt) {
-    console.log(evt, evt.target.name, evt.target.value);
+    // console.log(evt, evt.target.name, evt.target.value);
     this.setState({ [evt.target.name]: evt.target.value });
   }
 

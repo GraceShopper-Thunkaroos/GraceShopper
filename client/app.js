@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 
 const App = props => {
   const {isLoggedIn} = props
+  console.log('THESE ARE THE PROPS, ', props)
   return (
     <div>
       {/* {isLoggedIn && <Navbar />} */}
