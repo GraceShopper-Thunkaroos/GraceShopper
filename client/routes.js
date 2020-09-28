@@ -11,7 +11,8 @@ import {
   Landing,
   Cart,
   Checkout,
-  ThankYou
+  ThankYou,
+  NotFound
 } from './components'
 
 import {me} from './store'
@@ -31,7 +32,12 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        {!accessGranted && <Route exact path="/" component={Landing} />}
+        {!accessGranted && (
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route path="/" component={NotFound} />
+          </Switch>
+        )}
         {accessGranted && (
           <Switch>
             <Route exact path="/" component={UserHome} />
@@ -43,15 +49,9 @@ class Routes extends Component {
             <Route path="/checkout" component={Checkout} />
             <Route path="/thankyou" component={ThankYou} />
             <Route path="/home" component={UserHome} />
-            <Route exact path="/" component={Landing} />
-            {/* Displays Landing page as a fallback */}
-            {/* <Route component={Landing} /> */}
+            <Route path="/" component={NotFound} />
           </Switch>
         )}
-
-        {/* {!accessGranted && <Route component={Landing} />} */}
-
-        {/* Displays our Login component as a fallback */}
       </Switch>
     )
   }
