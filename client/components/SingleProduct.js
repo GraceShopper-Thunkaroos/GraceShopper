@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FaDog } from "react-icons/fa";
-import { fetchProduct } from "../store/product";
+import {
+  fetchAdditionalProduct,
+  fetchProduct,
+  setNewProduct
+} from "../store/product";
 import { ProductCard } from "./product-card";
 import { addItemToCart } from "../store/cart";
 
@@ -13,10 +17,12 @@ class SingleProduct extends Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.onClickSideBar = this.onClickSideBar.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
+    this.props.fetchAdditionalProduct();
   }
 
   onChange = e => {
@@ -32,6 +38,14 @@ class SingleProduct extends Component {
     };
     this.props.addItemToCart(this.props.user.id, order);
   };
+
+  onClickSideBar = id => {
+    this.props.fetchNewProduct(id);
+    this.props.fetchAdditionalProduct();
+  };
+
+  onSubmit = () => {};
+
 
   render() {
     const product = this.props.product;
@@ -81,13 +95,17 @@ class SingleProduct extends Component {
           </div>
           <div className="singleProduct__right">
             <h4>Dogs You May Like!</h4>
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
+            {!this.props.sideProducts ? (
+              <h4>Loading...</h4>
+            ) : (
+              this.props.sideProducts.map(item => {
+                return (
+                  <div onClick={() => this.onClickSideBar(item.id)} key={item.id}>
+                    <ProductCard product={item} history={this.props.history} />
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </React.Fragment>
@@ -99,6 +117,8 @@ const mapStateToProps = state => {
   return {
     product: state.product,
     user: state.user
+    sideProducts: state.sideProducts
+
   };
 };
 
@@ -106,6 +126,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProduct: productId => dispatch(fetchProduct(productId)),
     addItemToCart: (userId, order) => dispatch(addItemToCart(userId, order))
+    fetchAdditionalProduct: () => dispatch(fetchAdditionalProduct()),
+    fetchNewProduct: productId => dispatch(setNewProduct(productId))
   };
 };
 

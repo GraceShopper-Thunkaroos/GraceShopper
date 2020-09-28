@@ -13,10 +13,10 @@ const User = db.define('user', {
   },
   email: {
     type: Sequelize.STRING,
+    unique: true,
     validate: {
       isEmail: true
     },
-    unique: true,
     allowNull: false
   },
   phoneNumber: {
@@ -27,7 +27,7 @@ const User = db.define('user', {
   },
   privilege: {
     type: Sequelize.ENUM(['Guest', 'Buyer', 'Seller', 'Admin']),
-    defaultValue: 'Guest'
+    defaultValue: 'Buyer'
   },
   password: {
     type: Sequelize.STRING,

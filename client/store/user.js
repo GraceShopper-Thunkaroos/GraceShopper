@@ -7,22 +7,36 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const SET_GUEST = 'SET_GUEST'
+const DELETE_ERROR = 'DELETE_ERROR'
 
 /**
  * INITIAL STATE
  */
 const defaultUser = {}
-
+const guestUser = {
+  firstName: 'Guest',
+  lastName: '',
+  guest: true
+}
 /**
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 export const setGuest = () => ({type: SET_GUEST})
-
+export const deleteError = () => ({type: DELETE_ERROR})
 /**
  * THUNK CREATORS
  */
+export const postGuest = () => async dispatch => {
+  try {
+    await axios.post('/auth/login', guestUser)
+    dispatch(setGuest())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
@@ -32,12 +46,17 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
-  let res
+export const auth = (formData, method) => async dispatch => {
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    var res = await axios.post(`/auth/${method}`, formData)
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    var errorMessage = authError.response.data
+    if (errorMessage === 'User already exists') {
+      errorMessage = 'An account with that email exists already.'
+    } else if (errorMessage.includes('Validation error')) {
+      errorMessage = 'Sign up failed. Please try again with another email.'
+    }
+    return dispatch(getUser({error: errorMessage}))
   }
 
   try {
@@ -68,7 +87,10 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser
     case SET_GUEST:
-      return {...state, firstName: 'Guest', guest: true}
+      return guestUser
+    case DELETE_ERROR:
+      delete state.error
+      return state
     default:
       return state
   }

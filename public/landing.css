@@ -1,0 +1,227 @@
+#LandingPage {
+  display: flex;
+  flex-flow: row;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Start of input placeholder */
+
+#LandingPage input::placeholder {
+  font-size: 70%;
+}
+
+#LandingPage input {
+  background-color: #f0f5f7;
+  border: none;
+}
+
+/* End of input placeholder */
+
+#LandingPage #productImageFeed_Wrapper {
+  /* width: 80%; */
+  background-color: #f0f5f7;
+  margin: 0;
+  padding-left: 0.5vw;
+}
+
+@media (max-width: 800px) {
+  #productImageFeed_Wrapper {
+    display: none;
+    flex: 0;
+  }
+  .LandingAuthContainer {
+    width: 100%;
+  }
+  .AuthFormHeader span {
+    font-size: 6vw !important;
+  }
+}
+@media (min-width: 800px) {
+  #productImageFeed_Wrapper {
+    flex: 1;
+  }
+  .LandingAuthContainer {
+    /* flex-basis: 700px; */
+    flex: 1;
+  }
+  #productImageFeed_Wrapper img {
+    width: 15vw !important;
+    height: 15vw !important;
+  }
+}
+
+.LandingAuthWrapper nav > a {
+  font-size: 2vh;
+  text-align: center;
+  color: black;
+}
+
+.LandingAuthWrapper nav > a[aria-selected='true'] {
+  font-weight: bold;
+}
+
+.LandingAuthContainer {
+  border-left: solid lightblue 0.1px;
+}
+
+.ProductImageFeed_ColumnWrapper {
+  animation-duration: 120s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  width: 20%;
+  margin: 0;
+  display: table-row;
+  padding-right: 0.5vw;
+}
+
+.pos1,
+.pos3 {
+  animation-name: productFeedColumnT;
+  display: table-cell;
+}
+
+.pos2,
+.pos4 {
+  animation-name: productFeedColumnD;
+  display: table-cell;
+}
+
+#productImageFeed_Wrapper img {
+  /* margin-top: 75%;
+  width: 100%;
+  margin-top: 1rem;
+  padding-bottom: 100%;
+  position: relative;
+  height: 0; */
+
+  /* width: 17.5vw;
+  height: 17.5vw; */
+
+  width: 16vw;
+  height: 16vw;
+  margin-bottom: 0.5vw;
+
+  border-radius: 2px;
+  border: solid lightblue 0.2px;
+}
+
+@keyframes productFeedColumnT {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes productFeedColumnD {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.LandingAuthWrapper {
+  margin-top: 10vh;
+  height: 50%;
+}
+
+/* Start of Header */
+.AuthFormHeader {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+}
+.AuthFormHeader img {
+  flex: 1 1 0px;
+  width: 6%;
+  height: 6%;
+  margin: 0rem;
+}
+
+.AuthFormHeader span {
+  flex: 1.4 1 0px;
+  font-size: 2.4vw;
+  font-weight: bold;
+  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* End of Header */
+
+/* Start of Divider */
+.dividerWrapper {
+  /* margin-top: 8px !important; */
+  position: relative;
+}
+
+.dividerWrapper hr {
+  padding-top: 0.5em;
+
+  padding-bottom: 0.5em;
+}
+
+.dividerOrText {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.dividerOr {
+  box-sizing: content-box;
+  position: absolute;
+  margin: 0;
+  top: 0em;
+  left: 50%;
+  height: 1em;
+  padding: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: white;
+  color: gray;
+  transform: translate(-50%, -50%);
+}
+/* End of Divider */
+
+/* Start of Tab Container */
+
+.tabContainer {
+  width: 67%;
+  margin: auto;
+  display: flex;
+  font-size: 18px;
+  margin-bottom: 2vh;
+  cursor: pointer;
+}
+
+.tabContainer > * {
+  flex-grow: 1;
+  text-align: center;
+  padding-bottom: 1.9vh;
+  border-bottom: solid 2px #f0f5f7;
+}
+
+.tabContainer > [aria-selected='true'] {
+  border-bottom: solid 2px #30b7ec;
+  font-weight: bold;
+}
+/* End of Tab Container */
+
+/* Start of Error Message */
+.errorMessage {
+  color: red;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+/* End of Error Message */

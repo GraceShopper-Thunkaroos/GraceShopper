@@ -28,7 +28,7 @@ class Checkout extends Component {
         </div>
         <div id="order-details">
           <h2>order details</h2>
-          {/* {orders.map((order) => {
+          {order ? (
             <div key={order.id}>
               <h3>{order.status}</h3>
               <ul>
@@ -37,12 +37,13 @@ class Checkout extends Component {
                 <li>purchase date: {order.purchaseDate}</li>
                 <li>expected delivery date {order.expectedDeliveryDate}</li>
               </ul>
-            </div>;
-          })} */}
-          <button type="button" onClick={this.onSubmit}>
-            {" "}
-            confirm order
-          </button>
+            </div>
+          ) : (
+            <button type="button" onClick={this.onSubmit}>
+              {" "}
+              confirm order
+            </button>
+          )}
         </div>
       </div>
     );
