@@ -3,6 +3,9 @@ import axios from "axios";
 import LandingAuthForm from "./landing-auth-form.js";
 import { auth, postGuest, deleteError } from "../store/user";
 import { connect } from "react-redux";
+import Button from "react-bootstrap/Button";
+import { useHistory } from "react-router-dom";
+
 
 const tabContainerStyle = {
   display: "flex",
@@ -40,6 +43,9 @@ class Landing extends React.Component {
   }
 
   async componentDidMount() {
+    // if (this.user.props) {
+    //   console.log("exist");
+    // }
     const { data: products } = await axios.get("/api/products/");
     this.setState({ productPictures: products.map(elt => elt.picture) });
   }
@@ -69,7 +75,7 @@ class Landing extends React.Component {
   }
 
   onChange(evt) {
-    console.log(evt, typeof evt, Object.keys(evt.target));
+
     this.setState({ [evt.target.name]: evt.target.value });
   }
 

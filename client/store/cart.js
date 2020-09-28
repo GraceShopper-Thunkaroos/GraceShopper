@@ -3,17 +3,30 @@ import history from '../history'
 
 const defaultCart = []
 
-
 const GET_CART_ITEMS = 'GET_CART_ITEMS'
 const CLEAR_CART = 'CLEAR_CART'
-
 const SET_CART_ITEMS = 'SET_CART_ITEMS'
-
+const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 
 const setCartItems = cartItems => {
   return {
     type: SET_CART_ITEMS,
     cartItems
+  }
+}
+const removeCartItem = removedItem => {
+  return {
+    type: REMOVE_CART_ITEM,
+    removedItem
+  }
+}
+
+export const deleteCartItem = (userId, id) => async dispatch => {
+  try {
+    await axios.delete(`/api/orders/${userId}/${id}`)
+    dispatch(removeCartItem(id))
+  } catch (error) {
+    console.log('Failed to delete cart item')
   }
 }
 
@@ -53,6 +66,13 @@ export default function(state = defaultCart, action) {
       return action.cartItems
     case CLEAR_CART:
       return defaultCart
+    case REMOVE_CART_ITEM:
+      // eslint-disable-next-line no-case-declarations
+      const cartItems = [...state].filter(
+        // eslint-disable-next-line no-undef
+        ({product} = item) => product.id !== action.removedItem
+      )
+      return cartItems
     default:
       return state
   }

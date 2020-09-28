@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FaDog } from "react-icons/fa";
-import { fetchProduct } from "../store/product";
+import {
+  fetchAdditionalProduct,
+  fetchProduct,
+  setNewProduct
+} from "../store/product";
 import { ProductCard } from "./product-card";
 
 class SingleProduct extends Component {
@@ -11,11 +15,12 @@ class SingleProduct extends Component {
       inputField: 1
     };
     this.onChange = this.onChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.props.fetchProduct(this.props.match.params.id);
+    this.props.fetchAdditionalProduct();
   }
 
   onChange = e => {
@@ -24,7 +29,12 @@ class SingleProduct extends Component {
     });
   };
 
-  onSubmit = e => {};
+  onClick = id => {
+    this.props.fetchNewProduct(id);
+    this.props.fetchAdditionalProduct();
+  };
+
+  onSubmit = () => {};
 
   render() {
     const product = this.props.product;
@@ -66,12 +76,6 @@ class SingleProduct extends Component {
                     <h3>{product.description}</h3>
                   </div>
                 </div>
-                <button type="button" onSubmit={this.onSubmit}>
-                  Add To Cart {"  "}
-                  <FaDog />
-                </button>
-                <hr />
-                <h3>{product.description}</h3>
               </div>
             ) : (
               <h4>Loading Product...</h4>
@@ -79,13 +83,17 @@ class SingleProduct extends Component {
           </div>
           <div className="singleProduct__right">
             <h4>Dogs You May Like!</h4>
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
-            <ProductCard product={product} />
+            {!this.props.sideProducts ? (
+              <h4>Loading...</h4>
+            ) : (
+              this.props.sideProducts.map(item => {
+                return (
+                  <div onClick={() => this.onClick(item.id)} key={item.id}>
+                    <ProductCard product={item} history={this.props.history} />
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </React.Fragment>
@@ -95,13 +103,16 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.product
+    product: state.product,
+    sideProducts: state.sideProducts
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProduct: productId => dispatch(fetchProduct(productId))
+    fetchProduct: productId => dispatch(fetchProduct(productId)),
+    fetchAdditionalProduct: () => dispatch(fetchAdditionalProduct()),
+    fetchNewProduct: productId => dispatch(setNewProduct(productId))
   };
 };
 
