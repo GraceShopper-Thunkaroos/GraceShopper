@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCartItems } from "../store/cart";
-import { me } from "../store/user";
 
 class Cart extends Component {
   constructor() {
@@ -67,8 +66,7 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => ({
-  fetchCartItems: userId => dispatch(fetchCartItems(userId)),
-  fetchMe: () => dispatch(me())
+  fetchCartItems: userId => dispatch(fetchCartItems(userId))
 });
 
 export default connect(mapState, mapDispatch)(Cart);

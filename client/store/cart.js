@@ -3,17 +3,23 @@ import history from '../history'
 
 const defaultCart = []
 
-
 const GET_CART_ITEMS = 'GET_CART_ITEMS'
 const CLEAR_CART = 'CLEAR_CART'
+const ADDED_TO_CART = 'ADDED_TO_CART'
 
 const SET_CART_ITEMS = 'SET_CART_ITEMS'
-
 
 const setCartItems = cartItems => {
   return {
     type: SET_CART_ITEMS,
     cartItems
+  }
+}
+
+const addedToCart = order => {
+  return {
+    type: ADDED_TO_CART,
+    order
   }
 }
 
@@ -38,6 +44,15 @@ export const fetchCartItems = userId => async dispatch => {
   }
 }
 
+export const addItemToCart = (userId, order) => async dispatch => {
+  try {
+    const {data} = await axios.post(`/api/orders/${userId}`, order)
+    dispatch(addedToCart(data[0]))
+  } catch (error) {
+    console.log('Failed to post to /api/orders/userId...')
+  }
+}
+
 export const newCart = cart => async dispatch => {
   try {
     const {data} = await axios.post('api/orders', cart)
@@ -51,6 +66,8 @@ export default function(state = defaultCart, action) {
   switch (action.type) {
     case SET_CART_ITEMS:
       return action.cartItems
+    case ADDED_TO_CART:
+      return action.order
     case CLEAR_CART:
       return defaultCart
     default:

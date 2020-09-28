@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { FaDog } from "react-icons/fa";
 import { fetchProduct } from "../store/product";
 import { ProductCard } from "./product-card";
+import { addItemToCart } from "../store/cart";
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -11,10 +12,10 @@ class SingleProduct extends Component {
       inputField: 1
     };
     this.onChange = this.onChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.props.fetchProduct(this.props.match.params.id);
   }
 
@@ -24,7 +25,13 @@ class SingleProduct extends Component {
     });
   };
 
-  onSubmit = e => {};
+  onClick = () => {
+    const order = {
+      productId: this.props.product.id,
+      quantity: this.state.inputField
+    };
+    this.props.addItemToCart(this.props.user.id, order);
+  };
 
   render() {
     const product = this.props.product;
@@ -54,9 +61,10 @@ class SingleProduct extends Component {
                       value={this.state.inputField}
                       onChange={this.onChange}
                       min="0"
+                      max={product.quantity}
                     />
                   </div>
-                  <button type="button" onSubmit={this.onSubmit}>
+                  <button type="button" onClick={this.onClick}>
                     Add To Cart {"  "}
                     <span />
                     <FaDog />
@@ -89,13 +97,15 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProduct: productId => dispatch(fetchProduct(productId))
+    fetchProduct: productId => dispatch(fetchProduct(productId)),
+    addItemToCart: (userId, order) => dispatch(addItemToCart(userId, order))
   };
 };
 
