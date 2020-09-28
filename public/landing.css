@@ -13,13 +13,30 @@
   /* width: 80%; */
   background-color: #e0eefd;
   margin: 0;
-  padding-left: 21px;
-  flex: 1;
+  padding-left: 0.7em;
+}
+
+@media (max-width: 1200px) {
+  #productImageFeed_Wrapper {
+    display: none;
+    flex: 0;
+  }
+  .LandingAuthContainer {
+    flex: 2;
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  #productImageFeed_Wrapper {
+    flex: 1;
+  }
+  .LandingAuthContainer {
+    flex-basis: 700px;
+  }
 }
 
 .LandingAuthWrapper nav > a {
   font-size: 2vh;
-  width: 100%;
   text-align: center;
   color: black;
 }
@@ -30,7 +47,6 @@
 
 .LandingAuthContainer {
   border-left: solid lightblue 0.1px;
-  flex: 0.52;
 }
 
 .ProductImageFeed_ColumnWrapper {
@@ -41,6 +57,7 @@
   width: 20%;
   margin: 0;
   display: table-row;
+  padding-right: 0.7em;
 }
 
 .pos1,
@@ -56,9 +73,16 @@
 }
 
 #productImageFeed_Wrapper img {
+  /* margin-top: 75%;
   width: 100%;
-  height: 100%;
   margin-top: 1rem;
+  padding-bottom: 100%;
+  position: relative;
+  height: 0; */
+  width: 17.5vw;
+  height: 17.5vw;
+  margin-bottom: 0.7em;
+
   border-radius: 2px;
   border: solid lightblue 0.2px;
 }
@@ -94,22 +118,30 @@
 }
 .AuthFormHeader img {
   flex: 1 1 0px;
-  width: 4vw;
-  height: 7vw;
+  width: 6%;
+  height: 6%;
   margin: 0rem;
 }
 
 .AuthFormHeader span {
   flex: 1.4 1 0px;
-  font-size: 2vw;
+  font-size: 2em;
   margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
 }
 /* End of Header */
 
 /* Start of Divider */
 .dividerWrapper {
+  /* margin-top: 8px !important; */
   position: relative;
-  height: 2rem;
+}
+
+.dividerWrapper hr {
+  padding-top: 0.5em;
+
+  padding-bottom: 0.5em;
 }
 
 .dividerOrText {
@@ -122,7 +154,7 @@
   box-sizing: content-box;
   position: absolute;
   margin: 0;
-  top: 10px;
+  top: 0em;
   left: 50%;
   height: 1em;
   padding: 40px;
@@ -141,7 +173,8 @@
   margin: auto;
   display: flex;
   font-size: 18px;
-  margin-bottom: 4vh;
+  margin-bottom: 2vh;
+  cursor: pointer;
 }
 
 .tabContainer > * {
@@ -155,5 +188,13 @@
   border-bottom: solid 2px #30b7ec;
   font-weight: bold;
 }
-
 /* End of Tab Container */
+
+/* Start of Error Message */
+.errorMessage {
+  color: red;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+/* End of Error Message */

@@ -4,10 +4,10 @@ import Routes from './routes'
 import {connect} from 'react-redux'
 
 const App = props => {
-  const {isLoggedIn} = props
+  const {accessGranted} = props
   return (
     <div>
-      {isLoggedIn && <Navbar />}
+      {accessGranted && <Navbar />}
       <Routes />
     </div>
   )
@@ -20,7 +20,7 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    accessGranted: !!state.user.id || !!state.user.guest
   }
 }
 

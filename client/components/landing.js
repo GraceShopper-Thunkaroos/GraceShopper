@@ -1,11 +1,8 @@
 import React from "react";
 import axios from "axios";
 import LandingAuthForm from "./landing-auth-form.js";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
-import { auth, postGuest } from "../store/user";
+import { auth, postGuest, deleteError } from "../store/user";
 import { connect } from "react-redux";
-import Button from "react-bootstrap/Button";
 
 const tabContainerStyle = {
   display: "flex",
@@ -39,11 +36,17 @@ class Landing extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.tabSelect = this.tabSelect.bind(this);
+    this.guestLogin = this.guestLogin.bind(this);
   }
 
   async componentDidMount() {
     const { data: products } = await axios.get("/api/products/");
     this.setState({ productPictures: products.map(elt => elt.picture) });
+  }
+
+  guestLogin() {
+    this.props.postGuest();
+    this.props.history.push("/home");
   }
 
   tabSelect(evt) {
@@ -55,6 +58,7 @@ class Landing extends React.Component {
       "tabSelect"
     );
     this.setState({ tab: evt.target.dataset.name });
+    this.props.deleteError();
   }
 
   async onSubmit(evt) {
@@ -151,46 +155,9 @@ class Landing extends React.Component {
               onChange={this.onChange}
               onSubmit={this.onSubmit}
               tab={this.state.tab}
+              errorMessage={this.props.user.error}
+              guestLogin={this.guestLogin}
             />
-            {/* <Tabs
-              defaultActiveKey="login"
-              onSelect={evt => this.setState({ tab: evt })}
-              style={tabContainerStyle}
-            >
-              <Tab eventKey="login" title="Log In" style={tabStyle}>
-                <LandingAuthForm
-                  email={this.state.email}
-                  password={this.state.password}
-                  onChange={this.onChange}
-                  onSubmit={this.onSubmit}
-                  errorMessage={this.props.user.error}
-                  tab={this.state.tab}
-                />
-              </Tab>
-              <Tab eventKey="signup" title="Sign Up" style={tabStyle}>
-                <LandingAuthForm
-                  email={this.state.email}
-                  password={this.state.password}
-                  firstName={this.state.firstName}
-                  lastName={this.state.lastName}
-                  onChange={this.onChange}
-                  onSubmit={this.onSubmit}
-                  tab={this.state.tab}
-                />
-              </Tab>
-              <Tab eventKey="guest" title="Guest" style={tabStyle}>
-                <Button
-                  variant="primary"
-                  style={{ width: "67%", margin: "auto", height: "3.3rem" }}
-                  onClick={() => {
-                    this.props.postGuest();
-                    this.props.history.push("/home");
-                  }}
-                >
-                  Browse dogs as a guest!
-                </Button>
-              </Tab>
-            </Tabs> */}
           </div>
         </div>
       </div>
@@ -200,7 +167,8 @@ class Landing extends React.Component {
 
 const mapDispatch = dispatch => ({
   auth: (formData, method) => dispatch(auth(formData, method)),
-  postGuest: () => dispatch(postGuest())
+  postGuest: () => dispatch(postGuest()),
+  deleteError: () => dispatch(deleteError())
 });
 
 const mapProps = state => ({

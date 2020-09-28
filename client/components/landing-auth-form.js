@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import GoogleButton from "react-google-button";
 
+const buttonHeight = "3.2rem";
 const LandingAuthForm = props => {
   return (
     <Form
@@ -13,10 +14,20 @@ const LandingAuthForm = props => {
         width: "67%"
       }}
     >
+      {props.errorMessage && (
+        <div className="errorMessage">{props.errorMessage}</div>
+      )}
       {props.tab === "signup" && (
         <React.Fragment>
-          <Form.Row>
-            <Form.Group style={{ margin: "auto", marginBottom: "1rem" }}>
+          <Form.Row
+            style={{
+              margin: 0,
+              marginBottom: "1rem",
+              display: "flex",
+              justifyContent: "space-between"
+            }}
+          >
+            <Form.Group style={{ width: "48%", margin: 0, minWidth: 0 }}>
               <Form.Control
                 required={true}
                 name="firstName"
@@ -26,7 +37,7 @@ const LandingAuthForm = props => {
                 onChange={props.onChange}
               />
             </Form.Group>
-            <Form.Group style={{ margin: "auto", marginBottom: "1rem" }}>
+            <Form.Group style={{ width: "48%", margin: 0, minWidth: 0 }}>
               <Form.Control
                 required={true}
                 name="lastName"
@@ -70,7 +81,6 @@ const LandingAuthForm = props => {
         </Form.Group>
       </Form.Row>
       <br />
-      {props.errorMessage && <div>{props.errorMessage}</div>}
       <Form.Row style={{ margin: 0 }}>
         <Button
           variant="primary"
@@ -78,9 +88,10 @@ const LandingAuthForm = props => {
           style={{
             width: "100%",
             margin: "auto",
-            height: "3.3rem",
+            height: buttonHeight,
             backgroundColor: "#30B7EC",
-            border: "#30B7EC"
+            border: "#30B7EC",
+            fontSize: "1em"
           }}
         >
           {props.tab === "signup" ? "Sign Up" : "Log In"}
@@ -88,16 +99,14 @@ const LandingAuthForm = props => {
       </Form.Row>
       <div className="dividerWrapper" style={{ width: "100%", margin: "auto" }}>
         <hr className="dividerLine" />
-        <div className="dividerOr">
-          <div className="dividerOrText">or</div>
-        </div>
+        <div className="dividerOr">or</div>
       </div>
       <Form.Row style={{ margin: 0 }}>
         <a
           style={{
             width: "100%",
             margin: "auto",
-            height: "3.3rem",
+            height: buttonHeight,
             borderRadius: "4px",
             paddingLeft: "2px",
             paddingTop: "1px",
@@ -110,7 +119,7 @@ const LandingAuthForm = props => {
             style={{
               width: "100%",
               margin: "auto",
-              height: "3.3rem",
+              height: buttonHeight,
               borderRadius: "4px",
               paddingLeft: "2px",
               paddingTop: "1px",
@@ -118,6 +127,22 @@ const LandingAuthForm = props => {
             }}
           />
         </a>
+      </Form.Row>
+      <Form.Row style={{ margin: 0 }}>
+        <Button
+          variant="primary"
+          style={{
+            width: "100%",
+            margin: "auto",
+            marginTop: "1rem",
+            height: buttonHeight,
+            backgroundColor: "#30B7EC",
+            border: "#30B7EC"
+          }}
+          onClick={props.guestLogin}
+        >
+          Browse dogs as a guest!
+        </Button>
       </Form.Row>
     </Form>
   );
