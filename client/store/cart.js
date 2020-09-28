@@ -9,7 +9,6 @@ const ADDED_TO_CART = 'ADDED_TO_CART'
 const SET_CART_ITEMS = 'SET_CART_ITEMS'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 
-
 const setCartItems = cartItems => {
   return {
     type: SET_CART_ITEMS,
@@ -40,6 +39,8 @@ const addedToCart = order => {
 }
 
 export const fetchCartItems = userId => async dispatch => {
+  console.log('FIRED usedId, ', userId)
+
   try {
     const {data} = await axios.get(`/api/orders/${userId}`)
 
