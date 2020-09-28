@@ -12,10 +12,14 @@ class Cart extends Component {
     this.onClick = this.onClick.bind(this);
     this.onSelect = this.onSelect.bind(this);
   }
-  componentDidMount() {
+  async componentDidMount() {
+    console.log("DO I FIRE?");
     if (this.props.user.id) {
-      console.log(this.props.user.id);
+      console.log("WE ARE INSIDE THE EXPRES, ", this.props.user.id);
+      this.props.fetchMe();
       this.props.fetchCartItems(this.props.user.id);
+    } else {
+      console.log("WE ARE ELSE");
     }
   }
 
@@ -35,11 +39,12 @@ class Cart extends Component {
   render() {
     const cartItems = this.props.cartItems;
     const user = this.props.user;
-    const numItems = cartItems.reduce((accum, currentItem) => {
-      accum += currentItem.quantity;
-      return accum;
-    }, 0);
+    // const numItems = cartItems.reduce((accum, currentItem) => {
+    //   accum += currentItem.quantity;
+    //   return accum;
+    // }, 0);
 
+    console.log("RENDERING, ", this);
     let totalOrderCost = 0;
     return (
       <div className="cart">
@@ -93,7 +98,7 @@ class Cart extends Component {
               <div className="cart__right__summary">
                 <h4>Order Summary</h4>
                 <div className="summary__line">
-                  <h6>{numItems} Dogs</h6>
+                  <h6> Dogs</h6>
                   <h6>${totalOrderCost}</h6>
                 </div>
                 <div className="summary__line">
@@ -130,7 +135,6 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => ({
-
   fetchCartItems: userId => dispatch(fetchCartItems(userId)),
   fetchMe: () => dispatch(me()),
   deleteCartItem: (userId, id) => dispatch(deleteCartItem(userId, id))
