@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { fetchCartItems, deleteCartItem } from "../store/cart";
 import { me } from "../store/user";
 import { MdDone } from "react-icons/md";
@@ -129,6 +130,7 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => ({
+
   fetchCartItems: userId => dispatch(fetchCartItems(userId)),
   fetchMe: () => dispatch(me()),
   deleteCartItem: (userId, id) => dispatch(deleteCartItem(userId, id))

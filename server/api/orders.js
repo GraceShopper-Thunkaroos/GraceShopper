@@ -31,20 +31,27 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// GET /api/orders/user/:userId
-router.get('/user/:userId', async (req, res, next) => {
+// POST /api/orders/:userId
+router.post('/:userId', async (req, res, next) => {
   try {
-    const allUserOrders = await Order.findAll({
-      include: [{model: User, as: 'user'}],
+    const currentOpenOrder = await Order.findOrCreate({
       where: {
         [Op.and]: [{userId: req.params.userId}, {status: 'Open'}]
       }
     })
-    if (allUserOrders) {
-      res.json(allUserOrders)
-    } else {
-      res.sendStatus(404)
-    }
+    const updatedOrder = await OrderDetail.findOrCreate({
+      where: {
+        orderId: currentOpenOrder[0].dataValues.id,
+        productId: req.body.productId
+      }
+    })
+    await updatedOrder[0].update({
+      quantity: req.body.quantity + updatedOrder[0].dataValues.quantity
+    })
+    await currentOpenOrder[0].setUser(req.params.userId)
+    console.log(updatedOrder)
+    console.log(currentOpenOrder)
+    res.json(updatedOrder)
   } catch (err) {
     next(err)
   }

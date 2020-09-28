@@ -7,6 +7,7 @@ import {
   setNewProduct
 } from "../store/product";
 import { ProductCard } from "./product-card";
+import { addItemToCart } from "../store/cart";
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class SingleProduct extends Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.onClickSideBar = this.onClickSideBar.bind(this)
   }
 
   componentDidMount() {
@@ -29,12 +31,21 @@ class SingleProduct extends Component {
     });
   };
 
-  onClick = id => {
+  onClick = () => {
+    const order = {
+      productId: this.props.product.id,
+      quantity: this.state.inputField
+    };
+    this.props.addItemToCart(this.props.user.id, order);
+  };
+
+  onClickSideBar = id => {
     this.props.fetchNewProduct(id);
     this.props.fetchAdditionalProduct();
   };
 
   onSubmit = () => {};
+
 
   render() {
     const product = this.props.product;
@@ -64,9 +75,10 @@ class SingleProduct extends Component {
                       value={this.state.inputField}
                       onChange={this.onChange}
                       min="0"
+                      max={product.quantity}
                     />
                   </div>
-                  <button type="button" onSubmit={this.onSubmit}>
+                  <button type="button" onClick={this.onClick}>
                     Add To Cart {"  "}
                     <span />
                     <FaDog />
@@ -88,7 +100,7 @@ class SingleProduct extends Component {
             ) : (
               this.props.sideProducts.map(item => {
                 return (
-                  <div onClick={() => this.onClick(item.id)} key={item.id}>
+                  <div onClick={() => this.onClickSideBar(item.id)} key={item.id}>
                     <ProductCard product={item} history={this.props.history} />
                   </div>
                 );
@@ -104,13 +116,16 @@ class SingleProduct extends Component {
 const mapStateToProps = state => {
   return {
     product: state.product,
+    user: state.user
     sideProducts: state.sideProducts
+
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchProduct: productId => dispatch(fetchProduct(productId)),
+    addItemToCart: (userId, order) => dispatch(addItemToCart(userId, order))
     fetchAdditionalProduct: () => dispatch(fetchAdditionalProduct()),
     fetchNewProduct: productId => dispatch(setNewProduct(productId))
   };
