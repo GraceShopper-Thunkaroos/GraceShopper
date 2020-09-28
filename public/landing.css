@@ -17,18 +17,19 @@
 
 #LandingPage input {
   background-color: #f0f5f7;
+  border: none;
 }
 
 /* End of input placeholder */
 
 #LandingPage #productImageFeed_Wrapper {
   /* width: 80%; */
-  background-color: #e0eefd;
+  background-color: #f0f5f7;
   margin: 0;
-  padding-left: 0.7em;
+  padding-left: 0.5vw;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 800px) {
   #productImageFeed_Wrapper {
     display: none;
     flex: 0;
@@ -36,13 +37,21 @@
   .LandingAuthContainer {
     width: 100%;
   }
+  .AuthFormHeader span {
+    font-size: 6vw !important;
+  }
 }
-@media (min-width: 50em) {
+@media (min-width: 800px) {
   #productImageFeed_Wrapper {
     flex: 1;
   }
   .LandingAuthContainer {
-    flex-basis: 700px;
+    /* flex-basis: 700px; */
+    flex: 1;
+  }
+  #productImageFeed_Wrapper img {
+    width: 15vw !important;
+    height: 15vw !important;
   }
 }
 
@@ -61,14 +70,14 @@
 }
 
 .ProductImageFeed_ColumnWrapper {
-  animation-duration: 150s;
+  animation-duration: 120s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: normal;
   width: 20%;
   margin: 0;
   display: table-row;
-  padding-right: 0.7em;
+  padding-right: 0.5vw;
 }
 
 .pos1,
@@ -90,9 +99,13 @@
   padding-bottom: 100%;
   position: relative;
   height: 0; */
-  width: 17.5vw;
-  height: 17.5vw;
-  margin-bottom: 0.7em;
+
+  /* width: 17.5vw;
+  height: 17.5vw; */
+
+  width: 16vw;
+  height: 16vw;
+  margin-bottom: 0.5vw;
 
   border-radius: 2px;
   border: solid lightblue 0.2px;
@@ -124,7 +137,7 @@
 /* Start of Header */
 .AuthFormHeader {
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
   display: flex;
 }
 .AuthFormHeader img {
@@ -136,10 +149,13 @@
 
 .AuthFormHeader span {
   flex: 1.4 1 0px;
-  font-size: 2em;
+  font-size: 2.4vw;
+  font-weight: bold;
   margin-top: 2rem;
   display: inline-flex;
   align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
 }
 /* End of Header */
 
