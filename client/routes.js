@@ -26,10 +26,8 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn, isGuest} = this.props
-    console.log('routes rendered', isLoggedIn, isGuest)
     const accessGranted = isGuest || isLoggedIn
 
-    console.log('history', this.props.history)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -47,6 +45,7 @@ class Routes extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/home" component={UserHome} />
+            <Route exact path="/" component={Landing} />
             {/* Displays Landing page as a fallback */}
             {/* <Route component={Landing} /> */}
           </Switch>

@@ -12,6 +12,20 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/retrieve', async (req, res, next) => {
+  try {
+    const productList = await Product.findAll()
+    const outputArray = []
+    for (let i = 0; i < 6; i++) {
+      let randomIndex = Math.floor(Math.random() * productList.length)
+      outputArray.push(productList[randomIndex])
+    }
+    res.json(outputArray)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // GET /api/products/:id
 router.get('/:id', async (req, res, next) => {
   try {
