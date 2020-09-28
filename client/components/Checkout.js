@@ -7,42 +7,46 @@ import { fetchOrder } from "../store/order";
 
 class Checkout extends Component {
   componentDidMount() {
-    this.props.fetchOrder(this.props.order.id);
+    this.props.fetchOrder(2);
   }
 
   onSubmit() {
+    this.props.closeOrder();
     this.props.history.push("/thankyou");
+    // console.log("this is the history", history)
   }
 
   render() {
     const order = this.props.order;
-    console.log("this is the order", order);
-    // const order = this.props.order;
+    const { product } = this.props.order;
+    console.log("this is the product", product);
+    // console.log("this is the order", order);
     return (
       <div id="checkout-page">
-        <h1> Checkout page</h1>
+        <h1> Checkout</h1>
         <div className="All-Products-Container">
           {/* {cartItems.map((item) => {
             return <Cart key={item.id} item={item} />;
           })} */}
         </div>
         <div id="order-details">
-          <h2>order details</h2>
+          <h2>Order Details</h2>
           {order ? (
             <div key={order.id}>
               <h3>{order.status}</h3>
               <ul>
-                <li>totalPrice: {order.totalPrice}</li>
-                <li>instruction: {order.intruction}</li>
-                <li>purchase date: {order.purchaseDate}</li>
-                <li>expected delivery date {order.expectedDeliveryDate}</li>
+                <li>totalPrice: ${order.totalPrice}</li>
+                <li>Instruction: {order.instruction}</li>
+                <li>Purchase Date: {order.purchaseDate}</li>
+                <li>Expected Delivery Date {order.expectedDeliveryDate}</li>
               </ul>
+              <button type="button" onClick={this.onSubmit}>
+                {" "}
+                confirm order
+              </button>
             </div>
           ) : (
-            <button type="button" onClick={this.onSubmit}>
-              {" "}
-              confirm order
-            </button>
+            <h4> ...loading</h4>
           )}
         </div>
       </div>
@@ -52,13 +56,12 @@ class Checkout extends Component {
 
 const mapState = state => {
   return {
-    // cartItems: state.cartItems,
-    order: state.order
+    order: state.order,
+    user: state.user
   };
 };
 
 const mapDispatch = dispatch => ({
-  // fetchCartItems: (userId) => dispatch(fetchCartItems(userId)),
   fetchOrder: userId => dispatch(fetchOrder(userId))
 });
 

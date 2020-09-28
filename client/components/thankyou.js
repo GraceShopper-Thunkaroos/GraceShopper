@@ -11,7 +11,7 @@ const ThankYou = () => {
       }}
     >
       <h1>Your order has been submitted</h1>
-      Thank You for shopping with us, enjoy your new best friend!!!
+      <h2> Thank You for shopping with us, enjoy your new best friend!!!</h2>
     </div>
   );
 };

@@ -10,9 +10,11 @@ const getOrder = order => ({
 })
 
 //get order from a specific user
-export const fetchOrder = userId => dispatch => {
+export const fetchOrder = userId => async dispatch => {
+  console.log('fired', userId)
   try {
-    const {data} = axios.get(`/api/orders/${userId}`)
+    const {data} = await axios.get(`/api/orders/${userId}`)
+    console.log('this is the data', data)
     dispatch(getOrder(data))
   } catch (error) {
     console.log('failed to get api/orders/:id')
