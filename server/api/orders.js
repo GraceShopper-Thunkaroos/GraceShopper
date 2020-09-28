@@ -17,11 +17,14 @@ router.get('/', async (req, res, next) => {
 
 // GET /api/orders/:id
 router.get('/:id', async (req, res, next) => {
+  // console.log("i made it here", req.params.id)
   try {
     const order = await Order.findByPk(req.params.id, {
       include: ['billing', 'address', 'product']
     })
+    console.log('this is the order', order)
     if (order) {
+      console.log('i am returning the json')
       res.json(order)
     } else {
       res.sendStatus(404)
@@ -78,3 +81,17 @@ router.delete('/:userId/:lineId', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.put('/:id', async (req, res, next) => {
+//   try {
+//     const orderStatus = await Order.findByPk({
+//       where: {
+//       [Op.and]: [{userId: req.params.userId}, {status: 'Open'}]
+//        }
+//     })
+//     if (orderStatus) {
+
+//     }
+//   } catch (error) {
+//     next (error)
+// })

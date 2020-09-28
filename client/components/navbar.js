@@ -50,6 +50,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to="/products">
             Dogs <FaDog />
           </Link>
+          <a href="#" onClick={handleClick}>
+            Logout <MdExitToApp />
+          </a>
         </div>
       )}
     </nav>
