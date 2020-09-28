@@ -57,10 +57,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   </div>
 );
 
+//  : (
+//         <div>
+//           {/* The navbar will show these links before you log in */}
+//           <Link to="/login">Login</Link>
+//           <Link to="/signup">Sign Up</Link>
+//           <Link to="/products/1">Single</Link>
+//           <Link to="/products">Products</Link>
+//         </div>
+//       )
+
 /**
  * CONTAINER
  */
 const mapState = state => {
+  console.log("NAVBAR RENDER", !!state.user.id);
   return {
     isLoggedIn: !!state.user.id
   };

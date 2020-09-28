@@ -1,3 +1,5 @@
+@import 'landing.css';
+
 body {
   font-family: sans-serif;
   box-sizing: border-box;
@@ -16,80 +18,10 @@ nav a {
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
-}
-
-/* Start of Landing Page */
-#LandingPage {
-  display: flex;
-  flex-flow: row;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-#LandingPage #productImageFeed_Wrapper {
-  width: 80%;
-  background-color: #e0eefd;
-  margin: 0;
-  padding-left: 21px;
-}
-
-.ProductImageFeed_ColumnWrapper {
-  animation-duration: 60s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: normal;
-  width: 20%;
-  margin: 0;
-  display: table-row;
-}
-
-.pos1,
-.pos3 {
-  animation-name: productFeedColumnT;
-  display: table-cell;
-}
-
-.pos2,
-.pos4 {
-  animation-name: productFeedColumnD;
-  display: table-cell;
-}
-
-#LandingPage img {
-  width: 17vw;
-  height: 17vw;
-  margin-top: 1rem;
-}
-
-.LandingAuthContainer {
-  width: 30%;
-}
-
-@keyframes productFeedColumnT {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes productFeedColumnD {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-/* End of Landing Page */
+} */
 
 /* Product Pages */
 
@@ -168,40 +100,6 @@ form div {
   display: flex;
   border: 1px solid black;
   flex-direction: column;
-}
-.LandingAuthContainer {
-  width: 30%;
-}
-
-.LandingAuthWrapper {
-  margin-top: 25vh;
-}
-
-.AuthFormHeader {
-  margin: 0 auto;
-  width: 67%;
-  display: flex;
-}
-.AuthFormHeader img {
-  flex: 1 1 0px !important;
-  width: 0 !important;
-  height: 8rem !important;
-  margin: 0 !important;
-}
-
-.AuthFormHeader span {
-  flex: 1.4 1 0px;
-  font-size: 2.3rem;
-  margin-top: 1.9rem;
-}
-
-@keyframes productFeedColumnT {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
 }
 
 .cart-items {
@@ -330,46 +228,12 @@ form div {
   color: black;
 }
 
-.dividerOr {
-  box-sizing: content-box;
-  position: absolute;
-  margin: 0;
-  top: 10px;
-  left: 50%;
-  height: 1em;
-  padding: 40px;
-  padding-top: 0;
-  padding-bottom: 0;
-  background-color: white;
-  color: gray;
-  transform: translate(-50%, -50%);
-}
-
-.dividerOrText {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-/*
-.dividerLine {
-  position: absolute;
-  top: 2px;
-  margin: 2px !important;
-  margin-top: 2px !important;
-  padding: 2px;
-} */
-
 ul.nav.nav-tabs {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   padding: 10px;
-}
-
-.dividerWrapper {
-  position: relative;
-  height: 2rem;
 }
 
 form > * {

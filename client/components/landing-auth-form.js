@@ -2,24 +2,9 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import GoogleButton from "react-google-button";
-import history from "../history";
-import axios from "axios";
-/**
- * COMPONENT
- */
-const FormStyling = {
-  width: "100%",
-  margin: "auto",
-  display: "flex",
-  flexFlow: "column",
-  border: 0,
-  focus: {
-    backgroundColor: "lightblue"
-  }
-};
 
+const buttonHeight = "3.2rem";
 const LandingAuthForm = props => {
-  console.log(props, "wow");
   return (
     <Form
       onSubmit={props.onSubmit}
@@ -29,6 +14,42 @@ const LandingAuthForm = props => {
         width: "67%"
       }}
     >
+      {props.errorMessage && (
+        <div className="errorMessage">{props.errorMessage}</div>
+      )}
+      {props.tab === "signup" && (
+        <React.Fragment>
+          <Form.Row
+            style={{
+              margin: 0,
+              marginBottom: "1rem",
+              display: "flex",
+              justifyContent: "space-between"
+            }}
+          >
+            <Form.Group style={{ width: "48%", margin: 0, minWidth: 0 }}>
+              <Form.Control
+                required={true}
+                name="firstName"
+                placeholder="First Name"
+                size="lg"
+                value={props.firstName}
+                onChange={props.onChange}
+              />
+            </Form.Group>
+            <Form.Group style={{ width: "48%", margin: 0, minWidth: 0 }}>
+              <Form.Control
+                required={true}
+                name="lastName"
+                placeholder="Last Name"
+                size="lg"
+                value={props.lastName}
+                onChange={props.onChange}
+              />
+            </Form.Group>
+          </Form.Row>
+        </React.Fragment>
+      )}
       <Form.Row style={{ margin: 0 }}>
         <Form.Group
           style={{ width: "100%", margin: "auto", marginBottom: "1rem" }}
@@ -38,6 +59,7 @@ const LandingAuthForm = props => {
             name="email"
             placeholder="Email Address"
             size="lg"
+            autoComplete="username"
             value={props.email}
             onChange={props.onChange}
           />
@@ -47,9 +69,11 @@ const LandingAuthForm = props => {
       <Form.Row style={{ margin: 0 }}>
         <Form.Group style={{ width: "100%", margin: "auto" }}>
           <Form.Control
+            required={true}
             type="password"
             name="password"
             placeholder="Password"
+            autoComplete="current-password"
             size="lg"
             value={props.password}
             onChange={props.onChange}
@@ -61,33 +85,64 @@ const LandingAuthForm = props => {
         <Button
           variant="primary"
           type="submit"
-          style={{ width: "100%", margin: "auto", height: "3.3rem" }}
+          style={{
+            width: "100%",
+            margin: "auto",
+            height: buttonHeight,
+            backgroundColor: "#30B7EC",
+            border: "#30B7EC",
+            fontSize: "1em"
+          }}
         >
-          Log In
+          {props.tab === "signup" ? "Sign Up" : "Log In"}
         </Button>
       </Form.Row>
       <div className="dividerWrapper" style={{ width: "100%", margin: "auto" }}>
         <hr className="dividerLine" />
-        <div className="dividerOr">
-          <div className="dividerOrText">or</div>
-        </div>
+        <div className="dividerOr">or</div>
       </div>
       <Form.Row style={{ margin: 0 }}>
-        <GoogleButton
+        <a
           style={{
             width: "100%",
             margin: "auto",
-            height: "3.3rem",
+            height: buttonHeight,
             borderRadius: "4px",
             paddingLeft: "2px",
             paddingTop: "1px",
             paddingBottom: "1px"
           }}
-          onClick={() => {
-            history.push("/auth/google");
+          href="/auth/google"
+        >
+          <GoogleButton
+            type="light"
+            style={{
+              width: "100%",
+              margin: "auto",
+              height: buttonHeight,
+              borderRadius: "4px",
+              paddingLeft: "2px",
+              paddingTop: "1px",
+              paddingBottom: "1px"
+            }}
+          />
+        </a>
+      </Form.Row>
+      <Form.Row style={{ margin: 0 }}>
+        <Button
+          variant="primary"
+          style={{
+            width: "100%",
+            margin: "auto",
+            marginTop: "1rem",
+            height: buttonHeight,
+            backgroundColor: "#30B7EC",
+            border: "#30B7EC"
           }}
-        />
-        <a href="/auth/google">COME ON with Google</a>
+          onClick={props.guestLogin}
+        >
+          Browse dogs as a guest!
+        </Button>
       </Form.Row>
     </Form>
   );

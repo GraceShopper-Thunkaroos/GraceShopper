@@ -31,9 +31,10 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={Landing} />
+        {!accessGranted && <Route exact path="/" component={Landing} />}
         {accessGranted && (
           <Switch>
+            <Route exact path="/" component={UserHome} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/products/:id" component={SingleProduct} />
@@ -41,9 +42,6 @@ class Routes extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/thankyou" component={ThankYou} />
-            {/* <Route path="/single" component={SingleProduct} /> */}
-            <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Checkout} />
             <Route path="/home" component={UserHome} />
             <Route exact path="/" component={Landing} />
             {/* Displays Landing page as a fallback */}
