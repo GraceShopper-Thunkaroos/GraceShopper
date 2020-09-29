@@ -52,9 +52,39 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+// POST /api/orders/purchase
+// convert session cart to a purchased order in the database
+router.post('/purchase', async (req, res, next) => {
+  try {
+    if (!req.user) {
+      const err = new Error('Cannot make a purchase as a non-logged in user')
+      throw err
+    }
+    const cart = req.session.cart
+    const newOrder = await Order.create({
+      instruction: req.body.instruction,
+      purchaseDate: new Date()
+    })
+    await newOrder.setUser(req.user.id)
+    await Promise.all(
+      Object.keys(req.session.cart).map(productId =>
+        OrderDetail.create({
+          orderId: newOrder.dataValues.id,
+          productId,
+          quantity: cart[productId]
+        })
+      )
+    )
+    req.session.cart = {}
+    res.sendStatus(200)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // POST /api/orders/:userId
 // add quantity to a product on session cart
-router.post('/add/:productId', async (req, res, next) => {
+router.post('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
     const cart = req.session.cart
@@ -80,7 +110,7 @@ router.post('/add/:productId', async (req, res, next) => {
 
 // PUT /api/orders/edit/:productId
 // set quantity to a product on session cart
-router.put('/edit/:productId', async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
     const cart = req.session.cart
