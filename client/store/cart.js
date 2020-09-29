@@ -46,9 +46,24 @@ export const fetchCartItems = () => async dispatch => {
   }
 }
 
-export const purchaseCart = instruction => async dispatch => {
+export const purchaseCart = (
+  instruction,
+  billing,
+  billingAddress,
+  shipAddress
+) => async dispatch => {
+  console.log(instruction, billing, billingAddress, shipAddress)
   try {
-    await axios.post('/api/orders/purchase', {instruction})
+    await axios.post('/api/orders/purchase', {
+      instruction,
+      billing,
+      billingAddress,
+      shipAddress
+    })
+
+    // const result = await axios.post('/api/orders/purchase');
+
+    console.log('reached')
   } catch (error) {
     console.error(error)
   }

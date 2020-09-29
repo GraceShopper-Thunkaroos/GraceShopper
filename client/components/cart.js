@@ -20,8 +20,11 @@ class Cart extends Component {
   }
 
   onSubmit() {
-    console.log("Purchase submitted now");
-    this.props.history.push("/checkout");
+    if (this.props.user.id) {
+      this.props.history.push("/checkout");
+    } else {
+      this.props.history.push("/signup");
+    }
   }
 
   render() {
