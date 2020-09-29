@@ -35,6 +35,14 @@ const users = [
     phoneNumber: '123-456-7890',
     password: 'popcorn',
     privilege: 'Buyer'
+  },
+  {
+    firstName: 'Admin',
+    lastName: 'Admin',
+    email: 'admin@email.com',
+    phoneNumber: '123-456-7890',
+    password: '12345',
+    privilege: 'Admin'
   }
 ]
 
@@ -98,14 +106,12 @@ const seed = async () => {
     const order = await Order.create({
       instruction: 'Please ring the doorbell when you are in front.',
       purchaseDate: '09/22/2020',
-      expectedDeliveryDate: '09/30/2020',
-      totalPrice: 1500
+      expectedDeliveryDate: '09/30/2020'
     })
     const closedOrder = await Order.create({
       instruction: 'Please ring the doorbell when you are in front.',
       purchaseDate: '09/20/2020',
-      expectedDeliveryDate: '09/22/2020',
-      totalPrice: 1500
+      expectedDeliveryDate: '09/22/2020'
     })
     // link orders, addresses, and billings
     await closedOrder.setAddress(addressList[0])

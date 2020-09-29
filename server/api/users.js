@@ -2,6 +2,21 @@ const router = require('express').Router()
 const {User, Order} = require('../db/models')
 module.exports = router
 
+// middleware to prevent guests from accessing user routes
+router.use((req, res, next) => {
+  try {
+    if (!req.user) {
+      const err = new Error(
+        'Guests do not have privilege to access user details.'
+      )
+      throw err
+    }
+    next()
+  } catch (error) {
+    next(error)
+  }
+})
+
 // GET /api/users
 router.get('/', async (req, res, next) => {
   try {
@@ -12,6 +27,12 @@ router.get('/', async (req, res, next) => {
       // attributes: ['id', 'email']
       include: ['address', 'billing', 'order']
     })
+    if (req.user.dataValues.privilege !== 'Admin') {
+      const error = new Error(
+        'User does not have privilege to access user details.'
+      )
+      throw error
+    }
     res.json(userList)
   } catch (err) {
     next(err)
@@ -29,6 +50,17 @@ router.get('/:id', async (req, res, next) => {
       include: ['address', 'billing', 'order']
     })
     if (user) {
+      if (
+        !(
+          req.user.dataValues.id === user.dataValues.id ||
+          req.user.dataValues.privilege === 'Admin'
+        )
+      ) {
+        const error = new Error(
+          'User does not have privilege to access user details.'
+        )
+        throw error
+      }
       res.json(user)
     } else {
       res.sendStatus(404)

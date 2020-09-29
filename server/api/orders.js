@@ -7,6 +7,13 @@ module.exports = router
 // returns a list of all order details excluding pending open orders
 router.get('/', async (req, res, next) => {
   try {
+    if (!req.user || req.user.dataValues.privilege !== 'Admin') {
+      const err = new Error(
+        'Non-admins do not have privilege to access order details.'
+      )
+      throw err
+    }
+    console.log(req.user)
     const orderList = await Order.findAll({
       include: ['billing', 'address', 'product']
     })
@@ -43,6 +50,22 @@ router.get('/:id', async (req, res, next) => {
     console.log('this is the order', order)
     if (order) {
       console.log('i am returning the json')
+
+      if (!req.user) {
+        const err = new Error('Guest has no privelege to access orders.')
+        throw err
+      }
+
+      if (
+        !(
+          req.user.dataValues.privilege === 'Admin' ||
+          req.user.id === order.dataValues.id
+        )
+      ) {
+        const err = new Error('User does not have privelege to access orders.')
+        throw err
+      }
+
       res.json(order)
     } else {
       res.sendStatus(404)

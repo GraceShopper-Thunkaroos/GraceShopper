@@ -2,18 +2,9 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  status: {
-    type: Sequelize.ENUM([
-      'Open',
-      'Purchased',
-      'Processing',
-      'Shipped',
-      'Delivered'
-    ]),
-    defaultValue: 'Open'
-  },
-  totalPrice: {
-    type: Sequelize.DECIMAL
+  delivered: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   instruction: {
     type: Sequelize.TEXT
