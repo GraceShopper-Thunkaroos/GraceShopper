@@ -1,6 +1,8 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
-const ThankYou = () => {
+const ThankYou = props => {
   return (
     <div
       className="page-header"
@@ -10,10 +12,15 @@ const ThankYou = () => {
         backgroundPosition: "top left"
       }}
     >
-      <h1>Your order has been submitted</h1>
+      <h1>thanks {props.user} </h1>
       <h2> Thank You for shopping with us, enjoy your new best friend!!!</h2>
+      <Link to="/products"> buy some more dogs</Link>
     </div>
   );
 };
 
-export default ThankYou;
+const mapState = state => ({
+  user: state.user
+});
+
+export default withRouter(connect(mapState)(ThankYou));
