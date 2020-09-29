@@ -39,23 +39,23 @@ class Checkout extends Component {
           <div className="checkout__top__left">
             <h4>Billing Information</h4>
             <div className="checkout__top__billing">
-              <div className="checkout__address">
+              <div className="checkout__billing__info">
                 <label>Full Name: </label>
-                <input type="text" placeholder="Name" />
+                <input type="text" placeholder="Full Name" />
               </div>
               <div className="checkout__billing__info">
                 <label>Credit Card Number: </label>
-                <input type="text" placeholder="Name" />
+                <input type="text" placeholder="Credit Card Number" />
               </div>
               <div className="checkout__billing__container">
                 <div className="checkout__billing__info">
                   <label>Month</label>
-                  <input type="text" placeholder="Name" />
+                  <input type="text" placeholder="Month" />
                 </div>
 
                 <div className="checkout__billing__info">
                   <label>Year</label>
-                  <input type="text" placeholder="Name" />
+                  <input type="text" placeholder="Year" />
                 </div>
 
                 <div className="checkout__billing__info">
@@ -64,31 +64,30 @@ class Checkout extends Component {
                 </div>
               </div>
             </div>
-            <hr />
             <h5>Billing Address</h5>
             <div className="checkout__address">
               <label>Street 1:</label>
-              <input type="text" placeholder="street 1" />
+              <input type="text" placeholder="Street 1" />
             </div>
             <div className="checkout__address">
               <label>Street 2: </label>
-              <input type="text" placeholder="street 2" />
+              <input type="text" placeholder="Street 2" />
             </div>
             <div className="checkout__address">
               <label>City: </label>
-              <input type="text" placeholder="city" />
+              <input type="text" placeholder="City" />
             </div>
             <div className="checkout__address">
               <label>State: </label>
-              <input type="text" placeholder="state" />
+              <input type="text" placeholder="State" />
             </div>
             <div className="checkout__address">
-              <label>Zip: </label>
-              <input type="text" placeholder="zip" />
+              <label>Zip Code: </label>
+              <input type="text" placeholder="Zip Code" />
             </div>
             <div className="checkout__address">
               <label>Country: </label>
-              <input type="text" placeholder="country" />
+              <input type="text" placeholder="Country" />
             </div>
           </div>
           <div className="checkout__top__right">
@@ -104,27 +103,27 @@ class Checkout extends Component {
             </div>
             <div className="checkout__address">
               <label>Street 1:</label>
-              <input type="text" placeholder="street 1" />
+              <input type="text" placeholder="Street 1" />
             </div>
             <div className="checkout__address">
               <label>Street 2: </label>
-              <input type="text" placeholder="street 2" />
+              <input type="text" placeholder="Street 2" />
             </div>
             <div className="checkout__address">
               <label>City: </label>
-              <input type="text" placeholder="city" />
+              <input type="text" placeholder="City" />
             </div>
             <div className="checkout__address">
               <label>State: </label>
-              <input type="text" placeholder="state" />
+              <input type="text" placeholder="State" />
             </div>
             <div className="checkout__address">
-              <label>Zip: </label>
-              <input type="text" placeholder="zip" />
+              <label>Zip Code: </label>
+              <input type="text" placeholder="Zip Code" />
             </div>
             <div className="checkout__address">
               <label>Country: </label>
-              <input type="text" placeholder="country" />
+              <input type="text" placeholder="Country" />
             </div>
           </div>
           <div className="checkout__bottom__right">
