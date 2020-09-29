@@ -6,8 +6,23 @@ import { connect } from "react-redux";
 import { fetchCheckout } from "../store/order";
 import { CheckoutCard } from "./CheckoutCard";
 import { purchaseCart } from "../store/cart";
-import months from "../../server/db/months";
+//import months from "../../server/db/months";
 import years from "../../server/db/years";
+
+let months = [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12"
+];
 
 class Checkout extends Component {
   constructor() {
@@ -39,18 +54,86 @@ class Checkout extends Component {
     this.props.fetchCheckout();
   }
   onChange(evt) {
-    console.log("this has fired");
     this.setState({
       [evt.target.name]: evt.target.value
     });
   }
 
   onSubmit() {
-    // this.props.purchaseCart({ billing, shipping });
-    // this.props.history.push("/thankyou");
+    let checkedYear = parseInt(this.state.cc_year, 10);
+    let checkedCvC = parseInt(this.state.cc_cvc, 10);
+    let checkedCC = parseInt(this.state.cc_number, 10);
+
+    let numRegex = /^\d+$/;
+
+    let errorsArr = [];
+
+    // //cc year
+    // if (numRegex.test(checkedYear) === false) {
+    //   errorsArr.push("Billing CC Year must be greater than or equal to 2020");
+    // }
+
+    // if (checkedYear < 20) {
+    //   errorsArr.push("Billing CC Year must be greater than or equal to 2020");
+    // }
+
+    // if (numRegex.test(checkedCvC) === false) {
+    //   errorsArr.push("Please enter a valid CVC");
+    // }
+
+    // if (this.state.cc_cvc.length < 3) {
+    //   errorsArr.push("Please enter a valid CVC");
+    // }
+
+    // if (numRegex.test(checkedCC) === false) {
+    //   errorsArr.push("Please enter a valid CC number");
+    // }
+
+    // console.log("Errors, ", errorsArr);
+    // console.log(this.state.cc_year, this.state.cc_cvc);
+
+    if (errorsArr.length === 0) {
+      // let billing = {
+      //   cardNumber: this.state.cc_number,
+      //   securityCode: this.state.cc_cvc,
+      //   name: this.state.name,
+      //   expirationDate: `${this.state.cc_month}/01/20${this.state.cc_year}`,
+      // };
+
+      let billing = {
+        cardNumber: "123123123123",
+        securityCode: "123",
+        name: "Asim Samuel",
+        expirationDate: "09/01/2021"
+      };
+
+      let shippingAddress = {
+        street1: "12345 Asim Street",
+        street2: "Apt 102",
+        city: "Brooklyn",
+        state: "New York",
+        country: "USA",
+        zipcode: "11234"
+      };
+
+      let billingAddress = {
+        street1: "54321 misA Street",
+        street2: "Apt 102",
+        city: "Brooklyn",
+        state: "New York",
+        country: "USA",
+        zipcode: "11234"
+      };
+
+      console.log({ billing, billingAddress, shippingAddress });
+
+      this.props.purchaseCart("TEST", billing, billingAddress, shippingAddress);
+      this.props.history.push("/thankyou");
+    }
   }
   render() {
-    console.log("these are months", months);
+    console.log(this.state);
+    console.log("these are months", months["1"]);
     const { order } = this.props;
     const monthArray = Object.keys(months);
     // console.log("these are months", monthArray)
@@ -97,20 +180,13 @@ class Checkout extends Component {
               <div className="checkout__billing__container">
                 <div className="checkout__billing__info">
                   <label>Month</label>
-                  {/* <input
-                    type="text"
-                    placeholder="Month"
-                    name="cc_month"
-                    value={this.state.cc_month}
-                    onChange={this.onChange}
-                    maxLength="2"
-
-                  /> */}
-                  <select>
+                  <select onChange={this.onChange}>
                     {(() => {
                       const monthOptions = [];
-                      for (let i = 1; i <= 12; i++) {
-                        monthOptions.push(<option value={`${i}`}>{i}</option>);
+                      for (let i = 0; i <= 11; i++) {
+                        monthOptions.push(
+                          <option value={`${i + 1}`}>{months[i]}</option>
+                        );
                       }
                       // console.log("these are months options", monthOptions)
                       return monthOptions;
@@ -313,7 +389,10 @@ const mapState = state => {
 
 const mapDispatch = dispatch => ({
   fetchCheckout: () => dispatch(fetchCheckout()),
-  purchaseCart: () => dispatch(purchaseCart())
+  purchaseCart: (instruction, billing, billingAddress, shippingAddress) =>
+    dispatch(
+      purchaseCart(instruction, billing, billingAddress, shippingAddress)
+    )
 });
 
 export default connect(mapState, mapDispatch)(Checkout);

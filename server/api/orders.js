@@ -1,5 +1,12 @@
 const router = require('express').Router()
-const {Order, OrderDetail, Product, User, Address} = require('../db/models')
+const {
+  Order,
+  OrderDetail,
+  Product,
+  User,
+  Address,
+  Billing
+} = require('../db/models')
 const {Op} = require('sequelize')
 module.exports = router
 
@@ -98,6 +105,12 @@ router.post('/purchase', async (req, res, next) => {
         })
       )
     )
+    const orderShippingAddress = await Address.create(req.body.shipAddress)
+    const orderBillingAddress = await Address.create(req.body.billingAddress)
+    const orderBilling = await Billing.create(req.body.billing)
+    await newOrder.setAddress(orderShippingAddress)
+    await newOrder.setBilling(orderBilling)
+    await orderBilling.setAddress(orderBillingAddress)
     req.session.cart = {}
     res.sendStatus(200)
   } catch (err) {

@@ -20,7 +20,7 @@ class PageLogin extends React.Component {
   async onSubmit(evt) {
     evt.preventDefault();
     const { email, password, firstName, lastName } = this.state;
-    this.props.auth({ email, password, firstName, lastName }, this.state.tab);
+    this.props.auth({ email, password, firstName, lastName }, "login");
     this.setState({ email: "", password: "", firstName: "", lastName: "" });
   }
 
