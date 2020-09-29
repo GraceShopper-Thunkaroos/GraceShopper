@@ -142,7 +142,7 @@ const AuthForm = props => {
             }}
             onClick={props.guestLogin}
           >
-            Browse dogs as a guest!
+            Browse dogs!
           </Button>
         </Form.Row>
       )}

@@ -19,9 +19,9 @@ const setCartItems = cartItems => {
   }
 }
 
-const addedToCart = lineItem => {
-  return {}
-}
+// const addedToCart = lineItem => {
+//   return {}
+// }
 
 // thunk creators
 export const deleteCartItem = productId => async dispatch => {
@@ -46,9 +46,17 @@ export const fetchCartItems = () => async dispatch => {
   }
 }
 
+export const purchaseCart = instruction => async dispatch => {
+  try {
+    await axios.post('/api/orders/purchase', {instruction})
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const editCartItem = productId => async dispatch => {
   try {
-    await axios.put(`/api/orders/edit/:productId`)
+    await axios.put(`/api/orders/:productId`)
     await dispatch(fetchCartItems())
   } catch (error) {
     console.log('Failed to get /api/orders/userId...')
@@ -58,7 +66,7 @@ export const editCartItem = productId => async dispatch => {
 export const addItemToCart = (product, quantity) => async dispatch => {
   try {
     console.log('product id in addItemToCart', product.id)
-    await axios.post(`/api/orders/add/${product.id}`, {quantity})
+    await axios.post(`/api/orders/${product.id}`, {quantity})
     await dispatch(fetchCartItems())
   } catch (error) {
     console.log('Failed to post to /api/orders/userId...')
