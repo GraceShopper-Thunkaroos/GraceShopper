@@ -47,10 +47,13 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
+router.get('/me', async (req, res) => {
   console.log('inside auth me')
   if (req.user) {
-    res.json(req.user)
+    const foundUser = await User.findByPk(req.user.id, {
+      include: ['address', 'billing', 'order']
+    })
+    res.json(foundUser)
   } else if (req.session.guestUser) {
     res.json(req.session.guestUser)
   }

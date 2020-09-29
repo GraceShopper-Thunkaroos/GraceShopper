@@ -46,6 +46,14 @@ export const me = () => async dispatch => {
   }
 }
 
+// export const userProfile = () => async (dispatch, getState) => {
+//   try {
+//     const {data: userProfile} = await axios.get('/api/users/{}')
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+
 export const auth = (formData, method) => async dispatch => {
   try {
     var res = await axios.post(`/auth/${method}`, formData)

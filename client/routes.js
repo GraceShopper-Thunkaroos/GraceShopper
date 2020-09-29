@@ -12,7 +12,8 @@ import {
   Cart,
   Checkout,
   ThankYou,
-  NotFound
+  NotFound,
+  UserProfile
 } from './components'
 
 import {me} from './store'
@@ -41,6 +42,7 @@ class Routes extends Component {
         {accessGranted && (
           <Switch>
             <Route exact path="/" component={UserHome} />
+            <Route path="/profile" component={UserProfile} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/products/:id" component={SingleProduct} />

@@ -1,0 +1,76 @@
+#UserProfile {
+  width: 90vw;
+  height: 80vh;
+  border: solid black 1px;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 5vh;
+  display: flex;
+  flex-flow: row;
+}
+
+.UserProfileLeft {
+  margin-left: 3vw;
+  margin-right: 3vw;
+  flex: 0.7;
+  display: flex;
+  flex-flow: column;
+}
+
+.UserProfileLeft > form {
+  margin: 0 auto !important;
+}
+
+.UserProfileCard {
+  border: solid #dddddd 2px;
+  border-radius: 2px;
+  height: 40%;
+  width: 90%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.UserProfileCard > img {
+  width: 25vmin;
+  height: 25vmin;
+  margin: auto;
+  margin-left: 5%;
+  border: solid #dddddd 2px;
+  border-radius: 2px;
+}
+
+.UserProfileCard .CardInformation {
+  flex: 1;
+  font-size: 150%;
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+.BillingAddressTable {
+  flex: 1;
+  overflow: auto;
+  height: 90%;
+  margin-right: 1rem;
+  border-bottom: solid black 1px;
+}
+
+#UserProfile .tabContainer {
+  margin-top: 3%;
+}
+
+.AddressCard,
+.BillingCard {
+  border: solid #dddddd 1px;
+  border-radius: 5px;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
