@@ -688,6 +688,8 @@ form > * {
 
 .checkout__top__right {
   border: 1px solid black;
+  border-top: 0px;
+  border-right: 0px;
   width: 50%;
   height: 500px;
   overflow-y: scroll;
