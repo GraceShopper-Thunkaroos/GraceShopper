@@ -652,3 +652,149 @@ form > * {
 .summary__line:last-child {
   margin-top: 20px;
 }
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.checkout > h4 {
+  font-size: 35px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.checkout__top {
+  border: 1px solid black;
+  border-bottom: 0px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+}
+
+.checkout__top__left {
+  width: 50%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.checkout__top__left > input {
+  margin-bottom: 10px;
+}
+
+.checkout__top__right {
+  border: 1px solid black;
+  width: 50%;
+  height: 500px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+}
+
+.checkout__bottom {
+  border: 1px solid black;
+  border-top: 0px;
+  width: 100%;
+  height: 350px;
+  display: flex;
+}
+
+.checkout__bottom__left {
+  width: 50%;
+  height: 350px;
+  padding: 20px;
+  padding-top: 40px;
+}
+
+.checkout__bottom__right {
+  width: 50%;
+  height: 350px;
+  border-left: 1px solid black;
+}
+
+.checkout__address > label {
+  width: 25%;
+}
+
+.checkout__address > input {
+  width: 75%;
+}
+
+.checkout__top__billing {
+  margin-bottom: 40px;
+}
+
+.checkout__billing__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout__billing__info > label {
+  font-size: 10px;
+  margin: 0px;
+}
+
+.checkout__billing__info:nth-child(3) > input {
+  width: 15%;
+}
+.checkout__billing__info:nth-child(3) {
+  display: flex;
+}
+
+.checkout__billing__container {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkout__billing__container > .checkout__billing__info > input {
+  width: 100%;
+}
+
+.checkout__billing__container > .checkout__billing__info {
+  width: 20%;
+  padding-right: 10px;
+}
+
+.checkout__top__left > h4 {
+  margin-bottom: 10px;
+}
+
+.checkoutCard {
+  border: 1px solid black;
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  max-height: 500px;
+}
+
+.checkoutCard__left > img {
+  max-width: 250px;
+  max-height: 150px;
+  margin-right: 10px;
+}
+
+.checkoutCard__right {
+  flex: 0.8;
+}
+
+.checkoutCard__left {
+  flex: 0.15;
+}
+
+.checkoutCard__input {
+  display: flex;
+  flex: 0.05;
+  flex-direction: column-reverse;
+}
+
+.checkout__bottom__info {
+  padding: 20px;
+  border: 1px solid lightgray;
+  margin: 10px;
+}
+
+.checkout__bottom__info {
+}

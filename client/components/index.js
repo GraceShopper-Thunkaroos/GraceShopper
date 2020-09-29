@@ -16,4 +16,5 @@ export { default as Cart } from "./cart";
 export { default as Checkout } from "./Checkout";
 export { default as ThankYou } from "./thankyou";
 export { SingleProductCard } from "./SingleProductCard";
+export { CheckoutCard } from "./CheckoutCard";
 export { default as NotFound } from "./NotFound";
