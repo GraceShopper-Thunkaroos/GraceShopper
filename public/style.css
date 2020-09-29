@@ -1,5 +1,6 @@
 @import 'landing.css';
 @import 'page-auth.css';
+@import 'UserProfile.css';
 
 body {
   font-family: sans-serif;

@@ -54,6 +54,46 @@ const addresses = [
     state: 'New York',
     country: 'USA',
     zipcode: '11234'
+  },
+  {
+    street1: '12346 Asim Street',
+    street2: 'Apt 102',
+    city: 'Brooklyn',
+    state: 'New York',
+    country: 'USA',
+    zipcode: '11234'
+  },
+  {
+    street1: '12347 Asim Street',
+    street2: 'Apt 102',
+    city: 'Brooklyn',
+    state: 'New York',
+    country: 'USA',
+    zipcode: '11234'
+  },
+  {
+    street1: '12348 Asim Street',
+    street2: 'Apt 102',
+    city: 'Brooklyn',
+    state: 'New York',
+    country: 'USA',
+    zipcode: '11234'
+  },
+  {
+    street1: '12349 Asim Street',
+    street2: 'Apt 102',
+    city: 'Brooklyn',
+    state: 'New York',
+    country: 'USA',
+    zipcode: '11234'
+  },
+  {
+    street1: '12350 Asim Street',
+    street2: 'Apt 102',
+    city: 'Brooklyn',
+    state: 'New York',
+    country: 'USA',
+    zipcode: '11234'
   }
 ]
 
@@ -136,9 +176,9 @@ const seed = async () => {
         })
       )
     )
-
+    console.log(Object.keys(User.prototype))
     // Associating users with address and billing
-    await userList[0].addAddress(addressList[0])
+    await userList[0].addAddress(addressList)
     await userList[1].addAddress(addressList[0])
     await userList[0].addBilling(billingList[0])
     await userList[1].addBilling(billingList[0])
