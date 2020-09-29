@@ -4,6 +4,7 @@ const {Op} = require('sequelize')
 module.exports = router
 
 // GET /api/orders
+// returns a list of all order details excluding pending open orders
 router.get('/', async (req, res, next) => {
   try {
     const orderList = await Order.findAll({
@@ -15,9 +16,26 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// GET /api/orders/cart
+// sends open cart detail from session in the form [[product, quantity], ...]
+router.get('/cart', async (req, res, next) => {
+  try {
+    // {productId: quantity, ... }
+    const cart = req.session.cart
+    console.log('SESSION CART IN GET CART', cart)
+    const cartArray = await Promise.all(
+      Object.keys(cart).map(productId => Product.findByPk(productId))
+    )
+    console.log(cartArray)
+    res.json(cartArray.map(product => ({product, quantity: cart[product.id]})))
+  } catch (err) {
+    next(err)
+  }
+})
+
 // GET /api/orders/:id
+// sends details of a previously made order
 router.get('/:id', async (req, res, next) => {
-  // console.log("i made it here", req.params.id)
   try {
     const order = await Order.findByPk(req.params.id, {
       include: ['billing', 'address', 'product']
@@ -35,70 +53,59 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // POST /api/orders/:userId
-router.post('/:userId', async (req, res, next) => {
+// add quantity to a product on session cart
+router.post('/add/:productId', async (req, res, next) => {
   try {
-    const currentOpenOrder = await Order.findOrCreate({
-      where: {
-        [Op.and]: [{userId: req.params.userId}, {status: 'Open'}]
-      }
-    })
-    const updatedOrder = await OrderDetail.findOrCreate({
-      where: {
-        orderId: currentOpenOrder[0].dataValues.id,
-        productId: req.body.productId
-      }
-    })
-    await updatedOrder[0].update({
-      quantity: req.body.quantity + updatedOrder[0].dataValues.quantity
-    })
-    await currentOpenOrder[0].setUser(req.params.userId)
-    console.log(updatedOrder)
-    console.log(currentOpenOrder)
-    res.json(updatedOrder)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.delete('/:userId/:lineId', async (req, res, next) => {
-  try {
-    const {userId, lineId} = req.params
-    console.log('userid, lineId, ', userId, lineId)
-    if (Number.isNaN(userId) || Number.isNaN(lineId)) return res.sendStatus(400)
-    const orderId = await Order.findAll({
-      where: {
-        [Op.and]: [{userId: req.params.userId}, {status: 'Open'}]
-      }
-    })
-    if (orderId.length !== 0) {
-      const orderLine = await OrderDetail.findOne({
-        where: {
-          orderId: orderId[0].dataValues.id,
-          productId: lineId
-        }
-      })
-      if (orderLine) {
-        await orderLine.destroy()
-        res.sendStatus(204)
+    const productId = req.params.productId
+    const cart = req.session.cart
+    console.log('POST REQUEST TO ADD CART ITEM, productid:', productId, cart)
+    if (cart) {
+      console.log('cart', cart)
+      if (cart[productId]) {
+        cart[productId] += req.body.quantity
+      } else {
+        console.log('setting cart productid to quantity')
+        cart[productId] = req.body.quantity
+        console.log('right after setting', cart)
       }
     } else {
-      res.sendStatus(404)
+      req.session.cart = {[productId]: req.body.quantity}
+      console.log(req.session.cart)
     }
+    res.sendStatus(200)
   } catch (err) {
     next(err)
   }
 })
 
-// router.put('/:id', async (req, res, next) => {
-//   try {
-//     const orderStatus = await Order.findByPk({
-//       where: {
-//       [Op.and]: [{userId: req.params.userId}, {status: 'Open'}]
-//        }
-//     })
-//     if (orderStatus) {
+// PUT /api/orders/edit/:productId
+// set quantity to a product on session cart
+router.put('/edit/:productId', async (req, res, next) => {
+  try {
+    const productId = req.params.productId
+    const cart = req.session.cart
+    if (cart) {
+      cart[productId] = req.body.quantity
+    } else {
+      req.session.cart = {[productId]: req.body.quantity}
+    }
+    res.sendStatus(200)
+  } catch (err) {
+    next(err)
+  }
+})
 
-//     }
-//   } catch (error) {
-//     next (error)
-// })
+// DELETE /api/orders/:productId
+// delete product from a session cart
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    const cart = req.session.cart
+    const productId = req.params.productId
+    if (cart) {
+      delete cart[productId]
+    }
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
+  }
+})

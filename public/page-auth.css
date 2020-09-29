@@ -1,0 +1,23 @@
+.PageAuthForm {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 60vh;
+  width: 70vw;
+  border: solid #dddddd 1px;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 10vh;
+}
+
+.PageAuthForm > form {
+  /* padding: 5vw; */
+  margin: 0 auto !important;
+}
+
+.PageAuthForm > .FormHeader {
+  width: 67%;
+  font-size: 190%;
+  margin-top: 5vh;
+  margin-bottom: 1.5vh;
+}

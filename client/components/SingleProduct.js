@@ -36,7 +36,7 @@ class SingleProduct extends Component {
       productId: this.props.product.id,
       quantity: this.state.inputField
     };
-    await this.props.addItemToCart(this.props.user.id, order);
+    await this.props.addItemToCart(this.props.product, this.state.inputField);
     this.props.history.push("/cart");
   };
 

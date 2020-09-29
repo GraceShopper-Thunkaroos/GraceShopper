@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import GoogleButton from "react-google-button";
 
 const buttonHeight = "3.2rem";
-const LandingAuthForm = props => {
+const AuthForm = props => {
   return (
     <Form
       onSubmit={props.onSubmit}
@@ -17,7 +17,7 @@ const LandingAuthForm = props => {
       {props.errorMessage && (
         <div className="errorMessage">{props.errorMessage}</div>
       )}
-      {props.tab === "signup" && (
+      {props.formType === "signup" && (
         <React.Fragment>
           <Form.Row
             style={{
@@ -94,7 +94,7 @@ const LandingAuthForm = props => {
             fontSize: "1em"
           }}
         >
-          {props.tab === "signup" ? "Sign Up" : "Log In"}
+          {props.formType === "signup" ? "Sign Up" : "Log In"}
         </Button>
       </Form.Row>
       <div className="dividerWrapper" style={{ width: "100%", margin: "auto" }}>
@@ -128,24 +128,26 @@ const LandingAuthForm = props => {
           />
         </a>
       </Form.Row>
-      <Form.Row style={{ margin: 0 }}>
-        <Button
-          variant="primary"
-          style={{
-            width: "100%",
-            margin: "auto",
-            marginTop: "1rem",
-            height: buttonHeight,
-            backgroundColor: "#30B7EC",
-            border: "#30B7EC"
-          }}
-          onClick={props.guestLogin}
-        >
-          Browse dogs as a guest!
-        </Button>
-      </Form.Row>
+      {props.guestButton && (
+        <Form.Row style={{ margin: 0 }}>
+          <Button
+            variant="primary"
+            style={{
+              width: "100%",
+              margin: "auto",
+              marginTop: "1rem",
+              height: buttonHeight,
+              backgroundColor: "#30B7EC",
+              border: "#30B7EC"
+            }}
+            onClick={props.guestLogin}
+          >
+            Browse dogs as a guest!
+          </Button>
+        </Form.Row>
+      )}
     </Form>
   );
 };
 
-export default LandingAuthForm;
+export default AuthForm;

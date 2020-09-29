@@ -67,6 +67,14 @@ const createApp = () => {
     res.json([req.user, req.session])
   })
 
+  // creates a session cart if it doesn't exist
+  app.use((req, res, next) => {
+    if (!req.session.cart) {
+      req.session.cart = {}
+    }
+    next()
+  })
+
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
