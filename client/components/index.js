@@ -4,10 +4,11 @@
  * having to figure out which file they belong to!
  */
 export { default as Landing } from "./landing";
-export { default as LandingAuthForm } from "./landing-auth-form";
+export { default as AuthForm } from "./AuthForm";
 export { default as Navbar } from "./navbar";
 export { default as UserHome } from "./user-home";
-export { Login, Signup } from "./auth-form";
+export { default as Signup } from "./PageSignup";
+export { default as Login } from "./PageLogin";
 export { default as AllProducts } from "./AllProducts";
 export { default as ProductCard } from "./product-card";
 export { default as SingleProduct } from "./SingleProduct";

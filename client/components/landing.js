@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
-import LandingAuthForm from "./landing-auth-form.js";
+import AuthForm from "./AuthForm";
 import { auth, postGuest, deleteError } from "../store/user";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
-
 
 const tabContainerStyle = {
   display: "flex",
@@ -17,12 +16,6 @@ const tabContainerStyle = {
   width: "90%",
   justifyContent: "center",
   height: "4vw"
-};
-
-const tabStyle = {
-  flex: 1,
-  textAlign: "center",
-  fontSize: "2vw"
 };
 
 class Landing extends React.Component {
@@ -43,9 +36,6 @@ class Landing extends React.Component {
   }
 
   async componentDidMount() {
-    // if (this.user.props) {
-    //   console.log("exist");
-    // }
     const { data: products } = await axios.get("/api/products/");
     this.setState({ productPictures: products.map(elt => elt.picture) });
   }
@@ -75,7 +65,6 @@ class Landing extends React.Component {
   }
 
   onChange(evt) {
-
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
@@ -153,16 +142,17 @@ class Landing extends React.Component {
                 Sign Up
               </div>
             </div>
-            <LandingAuthForm
+            <AuthForm
               email={this.state.email}
               password={this.state.password}
               firstName={this.state.firstName}
               lastName={this.state.lastName}
               onChange={this.onChange}
               onSubmit={this.onSubmit}
-              tab={this.state.tab}
+              formType={this.state.tab}
               errorMessage={this.props.user.error}
               guestLogin={this.guestLogin}
+              guestButton={true}
             />
           </div>
         </div>
