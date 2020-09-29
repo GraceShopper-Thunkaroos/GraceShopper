@@ -46,12 +46,13 @@ export const fetchCartItems = () => async dispatch => {
   }
 }
 
-// export const purchaseCart = () => async dispatch => {
-//   try {
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
+export const purchaseCart = instruction => async dispatch => {
+  try {
+    await axios.post('/api/orders/purchase', {instruction})
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 export const editCartItem = productId => async dispatch => {
   try {
