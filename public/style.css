@@ -726,6 +726,15 @@ form > * {
   width: 75%;
 }
 
+.checkout__address__active > label {
+  width: 25%;
+}
+
+.checkout__address__active > input {
+  width: 75%;
+  border-color: red;
+}
+
 .checkout__top__billing {
   margin-bottom: 40px;
 }
@@ -747,6 +756,23 @@ form > * {
   display: flex;
 }
 
+.checkout__billing__info__active {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout__billing__info__active > label {
+  font-size: 10px;
+  margin: 0px;
+}
+
+.checkout__billing__info__active > input {
+  border-color: red;
+}
+.checkout__billing__info__active:nth-child(3) {
+  display: flex;
+}
+
 .checkout__billing__container {
   display: flex;
   flex-direction: row;
@@ -757,6 +783,15 @@ form > * {
 }
 
 .checkout__billing__container > .checkout__billing__info {
+  width: 20%;
+  padding-right: 10px;
+}
+
+.checkout__billing__container > .checkout__billing__info__active > input {
+  width: 100%;
+}
+
+.checkout__billing__container > .checkout__billing__info__active {
   width: 20%;
   padding-right: 10px;
 }
@@ -799,5 +834,92 @@ form > * {
   margin: 10px;
 }
 
-.checkout__bottom__info {
+.checkout__empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 100ms;
+}
+
+.checkout__empty:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.checkout__empty > button {
+  margin-top: 10px;
+}
+
+.userHome__top {
+  height: 550px;
+  display: flex;
+  background: url('https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/HB4AT3D3IMI6TMPTWIZ74WAR54.jpg&w=1440');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  justify-content: flex-end;
+  border: 1px solid white;
+}
+
+.userHome__top > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.userHome__button {
+  position: absolute;
+  display: flex;
+  flex: 1;
+  border: 1px solid black;
+  margin-right: 20px;
+  margin-top: 20px;
+  width: 250px;
+}
+
+.userHome__button > button {
+  width: 100%;
+  height: 50px;
+}
+
+.userHome__button:hover {
+  transform: scale(1.07);
+}
+
+.userHome__bottom {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.userHome__bottom > .product-card {
+  margin: 10px;
+}
+
+.userHome__bottom > .product-card > a > img {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+}
+
+.userHome__bottom > .product-card > a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.thankyou {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.thankyou > h4 {
+  font-size: 40px;
+}
+
+.thankyou > button {
+  width: 10%;
+  height: 50px;
 }

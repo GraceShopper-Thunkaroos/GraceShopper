@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {remove} from 'lodash'
 import history from '../history'
 
 // initial state
@@ -19,6 +20,13 @@ const setCartItems = cartItems => {
   }
 }
 
+const removeItem = productId => {
+  return {
+    type: REMOVE_CART_ITEM,
+    productId
+  }
+}
+
 // const addedToCart = lineItem => {
 //   return {}
 // }
@@ -28,6 +36,7 @@ export const deleteCartItem = productId => async dispatch => {
   try {
     await axios.delete(`/api/orders/${productId}`)
     await dispatch(fetchCartItems())
+    dispatch(removeItem(productId))
   } catch (error) {
     console.error(err)
   }
@@ -36,7 +45,6 @@ export const deleteCartItem = productId => async dispatch => {
 export const fetchCartItems = () => async dispatch => {
   try {
     const {data} = await axios.get(`/api/orders/cart`)
-    console.log(data)
 
     // returns an array of arrays of the form {product, quantity}
     // quantity in returned object holds order quantity. product holds inventory quantity.
@@ -52,7 +60,6 @@ export const purchaseCart = (
   billingAddress,
   shipAddress
 ) => async dispatch => {
-  console.log(instruction, billing, billingAddress, shipAddress)
   try {
     await axios.post('/api/orders/purchase', {
       instruction,
@@ -60,10 +67,6 @@ export const purchaseCart = (
       billingAddress,
       shipAddress
     })
-
-    // const result = await axios.post('/api/orders/purchase');
-
-    console.log('reached')
   } catch (error) {
     console.error(error)
   }
@@ -80,7 +83,6 @@ export const editCartItem = productId => async dispatch => {
 
 export const addItemToCart = (product, quantity) => async dispatch => {
   try {
-    console.log('product id in addItemToCart', product.id)
     await axios.post(`/api/orders/${product.id}`, {quantity})
     await dispatch(fetchCartItems())
   } catch (error) {

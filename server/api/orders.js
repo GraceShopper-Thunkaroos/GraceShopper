@@ -20,7 +20,6 @@ router.get('/', async (req, res, next) => {
       )
       throw err
     }
-    console.log(req.user)
     const orderList = await Order.findAll({
       include: ['billing', 'address', 'product']
     })
@@ -36,11 +35,9 @@ router.get('/cart', async (req, res, next) => {
   try {
     // {productId: quantity, ... }
     const cart = req.session.cart
-    console.log('SESSION CART IN GET CART', cart)
     const cartArray = await Promise.all(
       Object.keys(cart).map(productId => Product.findByPk(productId))
     )
-    console.log(cartArray)
     res.json(cartArray.map(product => ({product, quantity: cart[product.id]})))
   } catch (err) {
     next(err)
@@ -54,10 +51,7 @@ router.get('/:id', async (req, res, next) => {
     const order = await Order.findByPk(req.params.id, {
       include: ['billing', 'address', 'product']
     })
-    console.log('this is the order', order)
     if (order) {
-      console.log('i am returning the json')
-
       if (!req.user) {
         const err = new Error('Guest has no privelege to access orders.')
         throw err
@@ -124,19 +118,14 @@ router.post('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
     const cart = req.session.cart
-    console.log('POST REQUEST TO ADD CART ITEM, productid:', productId, cart)
     if (cart) {
-      console.log('cart', cart)
       if (cart[productId]) {
         cart[productId] += req.body.quantity
       } else {
-        console.log('setting cart productid to quantity')
         cart[productId] = req.body.quantity
-        console.log('right after setting', cart)
       }
     } else {
       req.session.cart = {[productId]: req.body.quantity}
-      console.log(req.session.cart)
     }
     res.sendStatus(200)
   } catch (err) {
