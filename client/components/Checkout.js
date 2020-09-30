@@ -183,7 +183,12 @@ class Checkout extends Component {
         zipcode: this.state.billing_zc
       };
 
-      this.props.purchaseCart("TEST", billing, billingAddress, shippingAddress);
+      this.props.purchaseCart(
+        "Handle with care!",
+        billing,
+        billingAddress,
+        shippingAddress
+      );
       this.props.history.push("/thankyou");
     }
     this.setState({ checkoutAttempt: true });

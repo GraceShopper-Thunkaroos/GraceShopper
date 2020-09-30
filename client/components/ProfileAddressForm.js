@@ -84,6 +84,7 @@ const ProfileAddressForm = props => {
         </Form.Group>
         <Form.Group style={{ width: "30%", margin: 0, minWidth: 0 }}>
           <Form.Control
+            required={true}
             name="state"
             placeholder="State"
             size="sm"
@@ -96,6 +97,7 @@ const ProfileAddressForm = props => {
         </Form.Group>
         <Form.Group style={{ width: "30%", margin: 0, minWidth: 0 }}>
           <Form.Control
+            required={true}
             name="zipcode"
             placeholder="Zipcode"
             size="sm"
@@ -117,6 +119,7 @@ const ProfileAddressForm = props => {
       >
         <Form.Group style={{ width: "70%", margin: 0, minWidth: 0 }}>
           <Form.Control
+            required={true}
             name="Country"
             placeholder="Country"
             size="sm"
@@ -133,8 +136,13 @@ const ProfileAddressForm = props => {
             placeholder="Type"
             size="sm"
             value={type}
+            as="select"
             onChange={props.onChange}
-          />
+          >
+            <option value="Personal">Personal</option>
+            <option value="Business">Business</option>
+            <option value="Billing">Billing</option>
+          </Form.Control>
           <Form.Text className="text-muted" style={{ textAlign: "left" }}>
             Type
           </Form.Text>

@@ -49,18 +49,17 @@ router.get('/cart', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id, {
-      include: ['billing', 'address', 'product']
+      include: ['billing', 'address', 'product', 'user']
     })
     if (order) {
       if (!req.user) {
         const err = new Error('Guest has no privelege to access orders.')
         throw err
       }
-
       if (
         !(
           req.user.dataValues.privilege === 'Admin' ||
-          req.user.id === order.dataValues.id
+          req.user.id === order.dataValues.userId
         )
       ) {
         const err = new Error('User does not have privelege to access orders.')
@@ -99,12 +98,28 @@ router.post('/purchase', async (req, res, next) => {
         })
       )
     )
-    const orderShippingAddress = await Address.create(req.body.shipAddress)
-    const orderBillingAddress = await Address.create(req.body.billingAddress)
-    const orderBilling = await Billing.create(req.body.billing)
-    await newOrder.setAddress(orderShippingAddress)
-    await newOrder.setBilling(orderBilling)
-    await orderBilling.setAddress(orderBillingAddress)
+    const orderShippingAddress = await Address.findOrCreate({
+      where: req.body.shipAddress,
+      defaults: req.body.shipAddress
+    })
+    const orderBillingAddress = await Address.findOrCreate({
+      where: req.body.billingAddress,
+      defaults: req.body.billingAddress
+    })
+    const orderBilling = await Billing.findOrCreate({
+      where: req.body.billing,
+      defaults: req.body.billing
+    })
+    console.log(
+      orderShippingAddress[0].dataValues,
+      orderBillingAddress[0].dataValues,
+      orderBilling[0].dataValues
+    )
+    // set address and billing to the order
+    await newOrder.setAddress(orderShippingAddress[0])
+    await newOrder.setBilling(orderBilling[0])
+    // set billing address to billing
+    await orderBilling[0].setAddress(orderBillingAddress[0])
     req.session.cart = {}
     res.sendStatus(200)
   } catch (err) {

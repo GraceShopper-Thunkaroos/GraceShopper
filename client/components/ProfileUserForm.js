@@ -1,23 +1,10 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import GoogleButton from "react-google-button";
 
 const buttonHeight = "3.2rem";
 
-function formatDate(date) {
-  var d = new Date(date);
-  var month = "" + (d.getMonth() + 1);
-  var day = "" + (d.getDate() + 1);
-  var year = d.getFullYear();
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [year, month, day].join("-");
-}
-
-const ProfileBillingForm = props => {
+const ProfileUserForm = props => {
   const { cardNumber, securityCode } = props.billing;
   const expirationDate = formatDate(props.billing.expirationDate);
   console.log("billing dates", expirationDate, props.billing.expirationDate);
@@ -41,17 +28,30 @@ const ProfileBillingForm = props => {
           justifyContent: "space-between"
         }}
       >
-        <Form.Group style={{ width: "100%", margin: 0, minWidth: 0 }}>
+        <Form.Group style={{ width: "48%", margin: 0, minWidth: 0 }}>
           <Form.Control
             required={true}
-            name="cardNumber"
-            placeholder="Card Number"
+            name="firstName"
+            placeholder="First Name"
             size="lg"
             value={cardNumber}
             onChange={props.onChange}
           />
           <Form.Text className="text-muted" style={{ textAlign: "left" }}>
-            Card Number
+            First Name
+          </Form.Text>
+        </Form.Group>
+        <Form.Group style={{ width: "48%", margin: 0, minWidth: 0 }}>
+          <Form.Control
+            required={true}
+            name="lastName"
+            placeholder="Last Name"
+            size="lg"
+            value={cardNumber}
+            onChange={props.onChange}
+          />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Last Name
           </Form.Text>
         </Form.Group>
       </Form.Row>
@@ -64,30 +64,17 @@ const ProfileBillingForm = props => {
           justifyContent: "space-between"
         }}
       >
-        <Form.Group style={{ width: "40%", margin: 0, minWidth: 0 }}>
+        <Form.Group style={{ width: "100%", margin: 0, minWidth: 0 }}>
           <Form.Control
             required={true}
-            name="securityCode"
-            placeholder="CVC"
+            name="phoneNumber"
+            placeholder="Phone Number"
             size="lg"
             value={securityCode}
             onChange={props.onChange}
           />
           <Form.Text className="text-muted" style={{ textAlign: "left" }}>
             CVC
-          </Form.Text>
-        </Form.Group>
-        <Form.Group style={{ width: "40%", margin: 0, minWidth: 0 }}>
-          <Form.Control
-            name="expirationDate"
-            placeholder="Expiration Date"
-            size="lg"
-            value={expirationDate}
-            onChange={props.onChange}
-            type="date"
-          />
-          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
-            Expiration Date
           </Form.Text>
         </Form.Group>
       </Form.Row>
@@ -111,4 +98,4 @@ const ProfileBillingForm = props => {
   );
 };
 
-export default ProfileBillingForm;
+export default ProfileUserForm;

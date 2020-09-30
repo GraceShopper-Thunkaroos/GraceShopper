@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AiFillEdit } from "react-icons/ai";
 
 export default class UserProfileCard extends Component {
   constructor() {
