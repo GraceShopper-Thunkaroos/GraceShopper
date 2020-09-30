@@ -8,6 +8,7 @@ const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const SET_GUEST = 'SET_GUEST'
 const DELETE_ERROR = 'DELETE_ERROR'
+const SET_ERROR = 'SET_ERROR'
 
 /**
  * INITIAL STATE
@@ -23,11 +24,22 @@ const guestUser = {
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const setError = error => ({type: SET_ERROR, error})
 export const setGuest = () => ({type: SET_GUEST})
 export const deleteError = () => ({type: DELETE_ERROR})
 /**
  * THUNK CREATORS
  */
+export const editUserBA = (method, editObject) => async dispatch => {
+  try {
+    console.log('inside editUSERBA', method, editObject)
+    await axios.post(`/api/users/${method}`, editObject)
+    dispatch(me())
+  } catch (error) {
+    console.log('Something went wrong with editUserBA')
+  }
+}
+
 export const postGuest = () => async dispatch => {
   try {
     await axios.post('/auth/login', guestUser)
@@ -39,6 +51,7 @@ export const postGuest = () => async dispatch => {
 
 export const me = () => async dispatch => {
   try {
+    console.log('AUTH ME FIRES inside user store')
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
@@ -64,7 +77,7 @@ export const auth = (formData, method) => async dispatch => {
     } else if (errorMessage.includes('Validation error')) {
       errorMessage = 'Sign up failed. Please try again with another email.'
     }
-    return dispatch(getUser({error: errorMessage}))
+    return dispatch(setError(errorMessage))
   }
 
   try {
@@ -96,6 +109,8 @@ export default function(state = defaultUser, action) {
       return defaultUser
     case SET_GUEST:
       return guestUser
+    case SET_ERROR:
+      return {...state, error: action.error}
     case DELETE_ERROR:
       delete state.error
       return state

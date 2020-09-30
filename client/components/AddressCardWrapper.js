@@ -7,11 +7,15 @@ export default class AddressCardWrapper extends Component {
   }
 
   render() {
-    const { address } = this.props;
+    const { address, toggleEdit } = this.props;
     return (
       <div className="AddressCardWrapper">
         {address.map(address => (
-          <AddressCard key={address.id} address={address} />
+          <AddressCard
+            key={address.id}
+            address={address}
+            toggleEdit={toggleEdit}
+          />
         ))}
       </div>
     );
