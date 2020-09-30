@@ -8,7 +8,11 @@ router.post('/login', async (req, res, next) => {
       req.session.guestUser = req.body
       res.sendStatus(200)
     } else {
-      const user = await User.findOne({where: {email: req.body.email}})
+
+      const user = await User.findOne({
+        where: {email: req.body.email},
+        include: ['address', 'billing', 'order']
+      })
       if (!user) {
         res.status(401).send('Wrong username and/or password.')
       } else if (!user.correctPassword(req.body.password)) {

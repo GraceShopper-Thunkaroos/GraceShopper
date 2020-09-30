@@ -1,22 +1,25 @@
 import React from "react";
 import AuthForm from "./AuthForm";
-import { auth } from "../store/user";
+import { auth, deleteError } from "../store/user";
 import { connect } from "react-redux";
 
 class PageSignup extends React.Component {
   constructor() {
     super();
     this.state = {
-      productPictures: [],
       email: "",
       password: "",
       firstName: "",
-      lastName: "",
-      tab: "login"
+      lastName: ""
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  componentWillUnmount() {
+    this.props.deleteError();
+  }
+
   async onSubmit(evt) {
     evt.preventDefault();
     const { email, password, firstName, lastName } = this.state;
@@ -49,7 +52,8 @@ class PageSignup extends React.Component {
 }
 
 const mapDispatch = dispatch => ({
-  auth: (formData, method) => dispatch(auth(formData, method))
+  auth: (formData, method) => dispatch(auth(formData, method)),
+  deleteError: () => dispatch(deleteError())
 });
 
 const mapProps = state => ({

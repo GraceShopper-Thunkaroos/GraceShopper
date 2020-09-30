@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Order} = require('../db/models')
+const {User, Address, Billing} = require('../db/models')
 module.exports = router
 
 // middleware to prevent guests from accessing user routes
@@ -67,5 +67,27 @@ router.get('/:id', async (req, res, next) => {
     }
   } catch (err) {
     next(err)
+  }
+})
+
+// POST /api/users/address
+router.post('/address', async (req, res, next) => {
+  try {
+    console.log('inside api/users/address', req.body)
+    await Address.update(req.body, {where: {id: req.body.id}})
+    res.sendStatus(200)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+// POST /api/users/billing
+router.post('/billing', async (req, res, next) => {
+  try {
+    console.log('inside api/users/billing', req.body)
+    await Billing.update(req.body, {where: {id: req.body.id}})
+    res.sendStatus(200)
+  } catch (error) {
+    console.error(error)
   }
 })
