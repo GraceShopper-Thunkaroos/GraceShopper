@@ -46,13 +46,6 @@ class Landing extends React.Component {
   }
 
   tabSelect(evt) {
-    console.log(
-      evt,
-      evt.target,
-      evt.target.name,
-      evt.target.dataset.name,
-      "tabSelect"
-    );
     this.setState({ tab: evt.target.dataset.name });
     this.props.deleteError();
   }
@@ -69,7 +62,6 @@ class Landing extends React.Component {
   }
 
   render() {
-    console.log("landing state", this.state);
     return (
       <div id="LandingPage">
         <div id="productImageFeed_Wrapper">

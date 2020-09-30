@@ -1,7 +1,6 @@
 import React from "react";
 
 const NotFound = () => {
-  console.log("not found renders");
   return (
     <div id="notFound">
       <h1>Your page was not found...</h1>

@@ -56,7 +56,7 @@ class UserProfile extends Component {
   }
 
   render() {
-    console.log("USER IN USER PROFILE", this.props.user);
+
     const user = this.props.user;
     const {
       address,

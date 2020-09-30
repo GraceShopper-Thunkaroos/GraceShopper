@@ -14,7 +14,13 @@ export const CheckoutCard = props => {
         </h4>
       </div>
       <div className="checkoutCard__input">
-        <button type="button">Delete</button>
+        <button
+          type="button"
+          value={product.id}
+          onClick={() => props.onSubmit(product.id)}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );

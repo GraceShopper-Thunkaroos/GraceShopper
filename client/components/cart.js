@@ -9,14 +9,9 @@ class Cart extends Component {
   constructor() {
     super();
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
   async componentDidMount() {
     this.props.fetchCartItems();
-  }
-
-  onChange(e) {
-    console.log(e.target.value);
   }
 
   onSubmit() {
@@ -39,7 +34,6 @@ class Cart extends Component {
         }, 0);
       }
     }
-    console.log("cart items", cartItems);
     let totalOrderCost = 0;
     return (
       <div className="cart">
@@ -50,7 +44,6 @@ class Cart extends Component {
           {cartItems.length ? (
             cartItems.map(item => {
               const { product, quantity } = item;
-              console.log(product, quantity);
               totalOrderCost += parseInt(product.price, 10);
               return (
                 <div key={product.id} className="cart-items">
@@ -66,18 +59,12 @@ class Cart extends Component {
                         onChange={this.onChange}
                       >
                         {(() => {
-                          console.log(product.quantity, quantity);
                           const options = [];
                           for (let i = 1; i <= product.quantity; i++) {
                             options.push(<option value={`${i}`}>{i}</option>);
                           }
                           return options;
                         })()}
-                        {/* <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option> */}
                       </select>
                     </h4>
                     <h4>Price: {`$ ${product.price}`}</h4>

@@ -40,20 +40,25 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </div>
         </div>
       ) : (
-        <div>
+        <div className="navbar__container">
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">
-            Login <BiLogInCircle />
-          </Link>
-          <Link to="/signup">
-            Sign Up <MdCreate />
-          </Link>
-          <Link to="/products">
-            Dogs <FaDog />
-          </Link>
-          <a href="#" onClick={handleClick}>
-            Logout <MdExitToApp />
-          </a>
+          <div className="navbar__left">
+            <Link to="/products">
+              Dogs <FaDog />
+            </Link>
+            <Link to="/cart">
+              Cart <MdShoppingCart />
+            </Link>
+          </div>
+
+          <div className="navbar__right">
+            <Link to="/login">
+              Login <BiLogInCircle />
+            </Link>
+            <Link to="/signup">
+              Sign Up <MdCreate />
+            </Link>
+          </div>
         </div>
       )}
     </nav>
@@ -61,21 +66,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   </div>
 );
 
-//  : (
-//         <div>
-//           {/* The navbar will show these links before you log in */}
-//           <Link to="/login">Login</Link>
-//           <Link to="/signup">Sign Up</Link>
-//           <Link to="/products/1">Single</Link>
-//           <Link to="/products">Products</Link>
-//         </div>
-//       )
-
 /**
  * CONTAINER
  */
 const mapState = state => {
-  console.log("NAVBAR RENDER", !!state.user.id);
   return {
     isLoggedIn: !!state.user.id
   };
