@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CheckoutCard } from "./CheckoutCard";
 import { purchaseCart, deleteCartItem, fetchCartItems } from "../store/cart";
+import { Redirect } from "react-router-dom";
 
 let errorsArr = [];
 
@@ -188,6 +189,9 @@ class Checkout extends Component {
     this.setState({ checkoutAttempt: true });
   }
   render() {
+    if (!this.props.user.id) {
+      return <Redirect to="/signup" />;
+    }
     const { cartItems: order } = this.props;
     const grandTotal = order.reduce((accum, currentValue) => {
       accum += currentValue.quantity * currentValue.product.price;
