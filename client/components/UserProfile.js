@@ -56,7 +56,6 @@ class UserProfile extends Component {
   }
 
   render() {
-
     const user = this.props.user;
     const {
       address,
@@ -67,6 +66,7 @@ class UserProfile extends Component {
       phoneNumber,
       email
     } = user;
+    address.sort((a, b) => a.id - b.id);
     console.log("editAddress", this.state.editAddress);
     return (
       <div id="UserProfile">
