@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUser, editUserBA } from "../store/user";
+import { getUser, editUserBA, me } from "../store/user";
 import UserProfileCard from "./UserProfileCard";
 import AddressCard from "./AddressCard";
 import BillingCard from "./BillingCard";
 import BillingCardWrapper from "./BillingCardWrapper";
 import AddressCardWrapper from "./AddressCardWrapper";
 import ProfileAddressForm from "./ProfileAddressForm";
+import ProfileBillingForm from "./ProfileBillingForm";
+import { MdCancel } from "react-icons/md";
+import OrderCardWrapper from "./OrderCardWrapper";
 
 class UserProfile extends Component {
   constructor() {
@@ -20,8 +23,14 @@ class UserProfile extends Component {
     };
     this.tabSelect = this.tabSelect.bind(this);
     this.editAddress = this.editAddress.bind(this);
+    this.editBilling = this.editBilling.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.cancelForm = this.cancelForm.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.loadInitialData();
   }
 
   tabSelect(evt) {
@@ -34,6 +43,18 @@ class UserProfile extends Component {
       editFormType: "address",
       editAddress: address
     });
+  }
+
+  editBilling(billing) {
+    this.setState({
+      editFormView: true,
+      editFormType: "billing",
+      editBilling: billing
+    });
+  }
+
+  cancelForm() {
+    this.setState({ editFormView: false });
   }
 
   onChange(evt) {
@@ -56,18 +77,20 @@ class UserProfile extends Component {
   }
 
   render() {
-
     const user = this.props.user;
     const {
       address,
       billing,
+      order,
       imgUrl,
       firstName,
       lastName,
       phoneNumber,
       email
     } = user;
-    console.log("editAddress", this.state.editAddress);
+    address.sort((a, b) => a.id - b.id);
+    billing.sort((a, b) => a.id - b.id);
+    console.log("orders?", user.order);
     return (
       <div id="UserProfile">
         <div className="UserProfileLeft">
@@ -78,17 +101,43 @@ class UserProfile extends Component {
             phoneNumber={phoneNumber}
             email={email}
           />
-          {(() => {
-            if (this.state.editFormType === "address") {
-              return [
-                <ProfileAddressForm
-                  address={this.state.editAddress}
-                  onChange={this.onChange}
-                  onSubmit={this.onSubmit}
-                />
-              ];
-            }
-          })()}
+          {this.state.editFormView &&
+            (() => {
+              if (this.state.editFormType === "address") {
+                return (
+                  <React.Fragment>
+                    <MdCancel onClick={this.cancelForm} />
+                    <ProfileAddressForm
+                      address={this.state.editAddress}
+                      onChange={this.onChange}
+                      onSubmit={this.onSubmit}
+                    />
+                  </React.Fragment>
+                );
+              } else if (this.state.editFormType === "billing") {
+                return (
+                  <React.Fragment>
+                    <MdCancel onClick={this.cancelForm} />
+                    <ProfileBillingForm
+                      billing={this.state.editBilling}
+                      onChange={this.onChange}
+                      onSubmit={this.onSubmit}
+                    />
+                  </React.Fragment>
+                );
+              } else if (this.state.editFormType === "order") {
+                return (
+                  <React.Fragment>
+                    <MdCancel onClick={this.cancelForm} />
+                    <ProfileUserForm
+                      user={this.props.user}
+                      onChange={this.onChange}
+                      onSubmit={this.onSubmit}
+                    />
+                  </React.Fragment>
+                );
+              }
+            })()}
         </div>
         <div className="BillingAddressTable">
           <div className="tabContainer">
@@ -115,12 +164,17 @@ class UserProfile extends Component {
             </div>
           </div>
           {this.state.tab === "billing" ? (
-            <BillingCardWrapper address={address} billing={billing} />
-          ) : (
+            <BillingCardWrapper
+              billing={billing}
+              toggleEdit={this.editBilling}
+            />
+          ) : this.state.tab === "address" ? (
             <AddressCardWrapper
               address={address}
               toggleEdit={this.editAddress}
             />
+          ) : (
+            <OrderCardWrapper order={order} />
           )}
         </div>
       </div>
@@ -137,7 +191,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getUser: user => dispatch(getUser(user)),
-    editUserBA: (method, editObject) => dispatch(editUserBA(method, editObject))
+    editUserBA: (method, editObject) =>
+      dispatch(editUserBA(method, editObject)),
+    loadInitialData: () => dispatch(me())
   };
 };
 

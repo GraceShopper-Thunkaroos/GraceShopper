@@ -83,6 +83,7 @@ const mapState = state => {
     isLoggedIn: !!state.user.id,
     cartItems: state.cartItems,
     user: state.user
+
   };
 };
 

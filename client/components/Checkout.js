@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CheckoutCard } from "./CheckoutCard";
 import { purchaseCart, deleteCartItem, fetchCartItems } from "../store/cart";
+import { Redirect } from "react-router-dom";
 
 let errorsArr = [];
 
@@ -182,12 +183,20 @@ class Checkout extends Component {
         zipcode: this.state.billing_zc
       };
 
-      this.props.purchaseCart("TEST", billing, billingAddress, shippingAddress);
+      this.props.purchaseCart(
+        "Handle with care!",
+        billing,
+        billingAddress,
+        shippingAddress
+      );
       this.props.history.push("/thankyou");
     }
     this.setState({ checkoutAttempt: true });
   }
   render() {
+    if (!this.props.user.id) {
+      return <Redirect to="/signup" />;
+    }
     const { cartItems: order } = this.props;
     const grandTotal = order.reduce((accum, currentValue) => {
       accum += currentValue.quantity * currentValue.product.price;

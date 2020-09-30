@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AiFillEdit } from "react-icons/ai";
 
 export default class BillingCard extends Component {
   constructor() {
@@ -6,7 +7,7 @@ export default class BillingCard extends Component {
   }
 
   render() {
-    const { addressList, billing } = this.props;
+    const { billing, toggleEdit } = this.props;
     let { cardNumber, expirationDate } = billing;
     expirationDate = new Date(expirationDate);
     const [expMonth, expYear] = [
@@ -17,16 +18,7 @@ export default class BillingCard extends Component {
       <div className="BillingCard">
         <div>Card ending in: {cardNumber.slice(-4)}</div>
         <div>Expires: {`${expMonth}/${expYear}`}</div>
-        <select>
-          {addressList.map(address => {
-            const { street1, street2, city, state, country } = address;
-            return (
-              <option
-                value={address.id}
-              >{`${street1} ${street2} ${city} ${state} ${country}`}</option>
-            );
-          })}
-        </select>
+        <AiFillEdit onClick={() => toggleEdit(billing)} />
       </div>
     );
   }

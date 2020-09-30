@@ -9,6 +9,18 @@
   flex-flow: row;
 }
 
+#UserProfile svg {
+  cursor: pointer;
+}
+
+#UserProfile > form .input {
+  font-size: 100%;
+}
+
+#UserProfile > small {
+  text-align: left !important;
+}
+
 .UserProfileLeft {
   margin-left: 3vw;
   margin-right: 3vw;
@@ -32,6 +44,7 @@
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  overflow: auto;
 }
 
 .UserProfileCard > img {
@@ -43,11 +56,18 @@
   border-radius: 2px;
 }
 
+.CardInformation svg {
+  float: right !important;
+  margin-right: 1rem;
+}
+
 .UserProfileCard .CardInformation {
   flex: 1;
   font-size: 150%;
   margin-top: 5%;
   margin-left: 5%;
+  display: flex;
+  flex-flow: column;
 }
 
 .BillingAddressTable {
@@ -63,7 +83,8 @@
 }
 
 .AddressCard,
-.BillingCard {
+.BillingCard,
+.OrderCard {
   border: solid #dddddd 1px;
   border-radius: 5px;
   width: 80%;

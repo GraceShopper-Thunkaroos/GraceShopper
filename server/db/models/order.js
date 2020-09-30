@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+const date = new Date()
 const Order = db.define('order', {
   delivered: {
     type: Sequelize.BOOLEAN,
@@ -13,7 +14,8 @@ const Order = db.define('order', {
     type: Sequelize.DATE
   },
   expectedDeliveryDate: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
+    defaultValue: new Date(date.getTime() + 10080 * 60000)
   }
 })
 
