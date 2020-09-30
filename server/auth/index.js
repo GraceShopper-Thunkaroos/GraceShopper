@@ -10,7 +10,10 @@ router.post('/login', async (req, res, next) => {
       req.session.guestUser = req.body
       res.sendStatus(200)
     } else {
-      const user = await User.findOne({where: {email: req.body.email}})
+      const user = await User.findOne({
+        where: {email: req.body.email},
+        include: ['address', 'billing', 'order']
+      })
       console.log('user in auth/login', user)
       if (!user) {
         console.log('No such user found:', req.body.email)
