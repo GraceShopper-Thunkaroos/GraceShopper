@@ -22,23 +22,32 @@ export const UserHome = props => {
   }, []);
 
   return (
-    <div className="userHome">
-      {firstName === "Guest" ? null : <h3>Welcome, {firstName}!</h3>}
-      <div className="userHome__top">
-        <div className="userHome__button">
-          <button type="button" onClick={() => props.history.push("/products")}>
-            Shop Dogs!
-          </button>
+    <React.Fragment>
+      <div className="userHome__container">
+        <div className="userHome__left" />
+        <div className="userHome">
+          {firstName === "Guest" ? null : <h3>Welcome, {firstName}!</h3>}
+          <div className="userHome__top">
+            <div className="userHome__button">
+              <button
+                type="button"
+                onClick={() => props.history.push("/products")}
+              >
+                Shop Dogs!
+              </button>
+            </div>
+          </div>
+
+          <div className="userHome__bottom">
+            {display.map((item, iter) => (
+              <ProductCard product={item} key={`${item}+${iter}`} />
+            ))}
+          </div>
+          <div className="userHome__right" />
+          {/* <Cart /> */}
         </div>
       </div>
-
-      <div className="userHome__bottom">
-        {display.map((item, iter) => (
-          <ProductCard product={item} key={`${item}+${iter}`} />
-        ))}
-      </div>
-      {/* <Cart /> */}
-    </div>
+    </React.Fragment>
   );
 };
 

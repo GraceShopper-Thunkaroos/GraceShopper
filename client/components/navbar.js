@@ -12,59 +12,68 @@ import {
 import { FaDog, FaHome } from "react-icons/fa";
 import { BiLogInCircle } from "react-icons/bi";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div className="navbar">
-    <nav>
-      {isLoggedIn ? (
-        <div className="navbar__container">
-          {/* The navbar will show these links after you log in */}
-          <div className="navbar__left">
-            <Link to="/home">
-              Home <FaHome />
-            </Link>
-            <Link to="/products">
-              Dogs <FaDog />
-            </Link>
-            <Link to="/cart">
-              Cart <MdShoppingCart />
-            </Link>
-            <Link to="/profile">Profile</Link>
+const Navbar = ({ handleClick, isLoggedIn, cartItems, user }) => {
+  return (
+    <div className="navbar">
+      <nav>
+        {isLoggedIn ? (
+          <div className="navbar__container">
+            {/* The navbar will show these links after you log in */}
+            <div className="navbar__left">
+              <Link to="/home">
+                Home <FaHome />
+              </Link>
+              <Link to="/products">
+                Dogs <FaDog />
+              </Link>
+              <Link to="/cart">
+                Cart <MdShoppingCart /> ({cartItems.length})
+              </Link>
+            </div>
+            <div className="navbar__right">
+              <Link to="/profile">
+                <img
+                  src={
+                    user.imgUrl
+                      ? user.imgUrl
+                      : "https://cdn.onlinewebfonts.com/svg/img_258083.png"
+                  }
+                  alt=""
+                />
+                My Account
+              </Link>
+              <a href="#" onClick={handleClick}>
+                Logout <MdExitToApp />
+              </a>
+            </div>
           </div>
-          <div className="navbar__right">
-            <Link to="/checkout">
-              Checkout <MdPayment />
-            </Link>
-            <a href="#" onClick={handleClick}>
-              Logout <MdExitToApp />
-            </a>
-          </div>
-        </div>
-      ) : (
-        <div className="navbar__container">
-          {/* The navbar will show these links before you log in */}
-          <div className="navbar__left">
-            <Link to="/products">
-              Dogs <FaDog />
-            </Link>
-            <Link to="/cart">
-              Cart <MdShoppingCart />
-            </Link>
-          </div>
+        ) : (
+          <div className="navbar__container">
+            {/* The navbar will show these links before you log in */}
+            <div className="navbar__left">
+              <Link to="/products">
+                Dogs <FaDog />
+              </Link>
+              <Link to="/cart">
+                Cart <MdShoppingCart />
+              </Link>
+            </div>
 
-          <div className="navbar__right">
-            <Link to="/login">
-              Login <BiLogInCircle />
-            </Link>
-            <Link to="/signup">
-              Sign Up <MdCreate />
-            </Link>
+            <div className="navbar__right">
+              <Link to="/login">
+                Login <BiLogInCircle />
+              </Link>
+              <Link to="/signup">
+                Sign Up <MdCreate />
+              </Link>
+            </div>
           </div>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-);
+        )}
+      </nav>
+      <hr />
+    </div>
+  );
+};
 
 /**
  * CONTAINER
@@ -72,7 +81,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    cartItems: state.cartItems
+    cartItems: state.cartItems,
+    user: state.user
+
   };
 };
 
