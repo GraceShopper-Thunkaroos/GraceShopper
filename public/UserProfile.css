@@ -9,6 +9,14 @@
   flex-flow: row;
 }
 
+#UserProfile > form .input {
+  font-size: 100%;
+}
+
+#UserProfile > small {
+  text-align: left !important;
+}
+
 .UserProfileLeft {
   margin-left: 3vw;
   margin-right: 3vw;
@@ -32,6 +40,7 @@
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  overflow: auto;
 }
 
 .UserProfileCard > img {

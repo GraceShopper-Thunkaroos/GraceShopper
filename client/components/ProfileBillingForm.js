@@ -5,15 +5,7 @@ import GoogleButton from "react-google-button";
 
 const buttonHeight = "3.2rem";
 const ProfileBillingForm = props => {
-  const {
-    street1,
-    street2,
-    city,
-    state,
-    zipcode,
-    country,
-    type
-  } = props.address;
+  const { cardNumber, securityCode, expirationDate } = props.billing;
   return (
     <Form
       onSubmit={props.onSubmit}
@@ -40,9 +32,12 @@ const ProfileBillingForm = props => {
             name="cardNumber"
             placeholder="Card Number"
             size="lg"
-            value={street1}
+            value={cardNumber}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Card Number
+          </Form.Text>
         </Form.Group>
       </Form.Row>
 
@@ -60,18 +55,24 @@ const ProfileBillingForm = props => {
             name="securityCode"
             placeholder="CVC"
             size="lg"
-            value={city}
+            value={securityCode}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            CVC
+          </Form.Text>
         </Form.Group>
         <Form.Group style={{ width: "30%", margin: 0, minWidth: 0 }}>
           <Form.Control
             name="expirationDate"
             placeholder="Expiration Date"
             size="lg"
-            value={state}
+            value={expirationDate}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Expiration Date
+          </Form.Text>
         </Form.Group>
       </Form.Row>
       <Form.Row style={{ margin: 0 }}>

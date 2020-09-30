@@ -20,7 +20,7 @@ const ProfileAddressForm = props => {
       style={{
         margin: "auto",
         textAlign: "center",
-        width: "67%"
+        width: "90%"
       }}
     >
       {props.errorMessage && (
@@ -39,19 +39,25 @@ const ProfileAddressForm = props => {
             required={true}
             name="street1"
             placeholder="Street 1"
-            size="lg"
+            size="sm"
             value={street1}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Street 1
+          </Form.Text>
         </Form.Group>
         <Form.Group style={{ width: "48%", margin: 0, minWidth: 0 }}>
           <Form.Control
             name="street2"
             placeholder="Street 2"
-            size="lg"
+            size="sm"
             value={street2}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Street 2
+          </Form.Text>
         </Form.Group>
       </Form.Row>
 
@@ -68,28 +74,37 @@ const ProfileAddressForm = props => {
             required={true}
             name="city"
             placeholder="City"
-            size="lg"
+            size="sm"
             value={city}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            City
+          </Form.Text>
         </Form.Group>
         <Form.Group style={{ width: "30%", margin: 0, minWidth: 0 }}>
           <Form.Control
             name="state"
             placeholder="State"
-            size="lg"
+            size="sm"
             value={state}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            State
+          </Form.Text>
         </Form.Group>
         <Form.Group style={{ width: "30%", margin: 0, minWidth: 0 }}>
           <Form.Control
             name="zipcode"
             placeholder="Zipcode"
-            size="lg"
+            size="sm"
             value={zipcode}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Zip Code
+          </Form.Text>
         </Form.Group>
       </Form.Row>
       <Form.Row
@@ -104,19 +119,25 @@ const ProfileAddressForm = props => {
           <Form.Control
             name="Country"
             placeholder="Country"
-            size="lg"
+            size="sm"
             value={country}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Country
+          </Form.Text>
         </Form.Group>
         <Form.Group style={{ width: "25%", margin: 0, minWidth: 0 }}>
           <Form.Control
             name="type"
             placeholder="Type"
-            size="lg"
+            size="sm"
             value={type}
             onChange={props.onChange}
           />
+          <Form.Text className="text-muted" style={{ textAlign: "left" }}>
+            Type
+          </Form.Text>
         </Form.Group>
       </Form.Row>
       <Form.Row style={{ margin: 0 }}>

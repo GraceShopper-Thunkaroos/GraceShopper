@@ -7,14 +7,14 @@ export default class BillingCardWrapper extends Component {
   }
 
   render() {
-    const { address, billing } = this.props;
+    const { billing, toggleEdit } = this.props;
     return (
       <div className="BillingCardWrapper">
         {billing.map(billing => (
           <BillingCard
             key={billing.id}
             billing={billing}
-            addressList={address}
+            toggleEdit={toggleEdit}
           />
         ))}
       </div>

@@ -7,6 +7,7 @@ import BillingCard from "./BillingCard";
 import BillingCardWrapper from "./BillingCardWrapper";
 import AddressCardWrapper from "./AddressCardWrapper";
 import ProfileAddressForm from "./ProfileAddressForm";
+import ProfileBillingForm from "./ProfileBillingForm";
 
 class UserProfile extends Component {
   constructor() {
@@ -20,6 +21,7 @@ class UserProfile extends Component {
     };
     this.tabSelect = this.tabSelect.bind(this);
     this.editAddress = this.editAddress.bind(this);
+    this.editBilling = this.editBilling.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -33,6 +35,14 @@ class UserProfile extends Component {
       editFormView: true,
       editFormType: "address",
       editAddress: address
+    });
+  }
+
+  editBilling(billing) {
+    this.setState({
+      editFormView: true,
+      editFormType: "billing",
+      editBilling: billing
     });
   }
 
@@ -67,6 +77,7 @@ class UserProfile extends Component {
       email
     } = user;
     address.sort((a, b) => a.id - b.id);
+    billing.sort((a, b) => a.id - b.id);
     console.log("editAddress", this.state.editAddress);
     return (
       <div id="UserProfile">
@@ -80,13 +91,21 @@ class UserProfile extends Component {
           />
           {(() => {
             if (this.state.editFormType === "address") {
-              return [
+              return (
                 <ProfileAddressForm
                   address={this.state.editAddress}
                   onChange={this.onChange}
                   onSubmit={this.onSubmit}
                 />
-              ];
+              );
+            } else if (this.state.editFormType === "billing") {
+              return (
+                <ProfileBillingForm
+                  billing={this.state.editBilling}
+                  onChange={this.onChange}
+                  onSubmit={this.onSubmit}
+                />
+              );
             }
           })()}
         </div>
@@ -115,7 +134,10 @@ class UserProfile extends Component {
             </div>
           </div>
           {this.state.tab === "billing" ? (
-            <BillingCardWrapper address={address} billing={billing} />
+            <BillingCardWrapper
+              billing={billing}
+              toggleEdit={this.editBilling}
+            />
           ) : (
             <AddressCardWrapper
               address={address}
