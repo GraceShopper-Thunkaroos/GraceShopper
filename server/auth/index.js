@@ -8,7 +8,6 @@ router.post('/login', async (req, res, next) => {
       req.session.guestUser = req.body
       res.sendStatus(200)
     } else {
-
       const user = await User.findOne({
         where: {email: req.body.email},
         include: ['address', 'billing', 'order']
@@ -41,7 +40,7 @@ router.post('/signup', async (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   req.logout()
-  req.session.destroy()
+  // req.session.destroy()
   res.redirect('/')
 })
 

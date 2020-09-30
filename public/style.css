@@ -851,14 +851,23 @@ form > * {
   margin-top: 10px;
 }
 
+.userHome {
+  width: 90%;
+}
+
 .userHome__top {
   height: 550px;
   display: flex;
   background: url('https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/HB4AT3D3IMI6TMPTWIZ74WAR54.jpg&w=1440');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  object-fit: contain;
   justify-content: flex-end;
   border: 1px solid white;
+}
+
+.userHome__left {
+  flex: 0.4;
 }
 
 .userHome__top > img {
@@ -922,4 +931,20 @@ form > * {
 .thankyou > button {
   width: 10%;
   height: 50px;
+}
+
+.userHome__container {
+  display: flex;
+}
+
+.navbar__right > a > img {
+  width: 30px;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 10rem;
+  margin-right: 10px;
+}
+
+.navbar__right > a:nth-child(4) {
+  margin-top: 15px;
 }
